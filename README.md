@@ -15,18 +15,74 @@
 
 #
 ## Getting Started
-
+1. Clone this repository
+2. Install dependencies (`npm install`)
+3. Create a `.env` file based on the `.env.example` and replace the value of `SESSION_SECRET` with your own `SESSION_SECRET` value. You can generate a value by using [UUID](https://www.npmjs.com/package/uuid) to have a more secure value.
+4. Set up your PostgreSQL ddiy_app user, a password and database and make sure it matches the `.env` file. Make sure to give CREATEDB privileges to your ddiy_app user.
+5. Enter the following commands:
+```
+npx dotenv sequelize-cli db:create
+npx dotenv sequelize-cli db:migrate
+npx dotenv sequelize-cli db:seed:all
+npm start
+```
 #
 ## Technologies Used
+**Front End**
+* JavaScript
+* HTML
+* CSS
+* [Favicon.io](https://favicon.io)
+* [Fontawesome](http://fontawesome.com/)
+* React
+* Redux
+* Heroku
+
+**Back End**
+* Express.js
+* Sequelize.js
+* Faker.js
+* Node.js
+* Bcryptjs
+* PostgreSQL and Postbird
+* AJAX
+* AWS
 
 #
 ## Key Features
+* Users can view, upload, edit and delete photos
+* Users can view, post, edit and delete comments
+* Users can create albums for their photos
+* Users can add tags to photos and see all photos with an associated tag
+* Users can like another user's photos
+* Users can follow other users
 
 #
 ## Code Snippets
 
+```js
+useEffect(() => {
+  dispatch(getSinglePhoto(id))
+
+}, [dispatch, id])
+
+``
+
 #
 ## Wiki
+[API Documentation](https://github.com/JeffersonGarcia15/UniverseJF/wiki/API-Documentation)
+
+[Feature List](https://github.com/JeffersonGarcia15/UniverseJF/wiki/MVP-Feature-List)
+
+[Frontend Routes](https://github.com/JeffersonGarcia15/UniverseJF/wiki/Frontend-Routes)
+
+[Schema](https://github.com/JeffersonGarcia15/UniverseJF/wiki/Database-Schema)
+
+[User Stories](https://github.com/JeffersonGarcia15/UniverseJF/wiki/User-Stories)
+
+![](https://live.staticflickr.com/65535/51190674126_888c2b4b52_k.jpg)
+
 
 # 
 ## Future Goals
+*Finish features that were not implemented
