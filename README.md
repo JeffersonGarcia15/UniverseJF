@@ -66,7 +66,7 @@ useEffect(() => {
 
 }, [dispatch, id])
 
-``
+```
 
 #
 ## Wiki
@@ -85,4 +85,4 @@ useEffect(() => {
 
 # 
 ## Future Goals
-*Finish features that were not implemented
+* Finish features that were not implemented
