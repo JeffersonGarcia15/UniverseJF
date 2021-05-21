@@ -6,12 +6,12 @@
 
 #
 ## Table of content
-1. [Getting Started](https://github.com/jdaniel01/ddiy-overflow-clone#getting-started)
-2. [Technologies Used](https://github.com/jdaniel01/ddiy-overflow-clone#technologies-used)
-3. [Key Features](https://github.com/jdaniel01/ddiy-overflow-clone#key-features)
-4. [Code Snippets](https://github.com/jdaniel01/ddiy-overflow-clone#code-snippets)
-5. [Wiki](https://github.com/jdaniel01/ddiy-overflow-clone#wiki)
-6. [Future Goals](https://github.com/jdaniel01/ddiy-overflow-clone#future-goals)
+1. [Getting Started](https://github.com/JeffersonGarcia15/UniverseJF#getting-started)
+2. [Technologies Used](https://github.com/JeffersonGarcia15/UniverseJF#technologies-used)
+3. [Key Features](https://github.com/JeffersonGarcia15/UniverseJF#key-features)
+4. [Code Snippets](https://github.com/JeffersonGarcia15/UniverseJF#code-snippets)
+5. [Wiki](https://github.com/JeffersonGarcia15/UniverseJF#wikii)
+6. [Future Goals](https://github.com/JeffersonGarcia15/UniverseJF#future-goals)
 
 #
 ## Getting Started
