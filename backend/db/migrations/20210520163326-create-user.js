@@ -1,7 +1,5 @@
 'use strict';
 
-const { DataTypes } = require("sequelize/types");
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -25,7 +23,7 @@ module.exports = {
         unique: true,
       },
       email: {
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(255),
         allowNull: false,
         unique: true,
       },

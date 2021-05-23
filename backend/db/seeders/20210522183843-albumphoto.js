@@ -2,6 +2,9 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('AlbumPhotos', [
+      { photoId: 1, albumId: 1}
+    ])
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -22,5 +25,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
+   return queryInterface.bulkDelete('AlbumPhotos', null, {})
   }
 };

@@ -18,8 +18,10 @@ const removeUser = () => {
 };
 
 export const createUser = (user) => async (dispatch) => {
-    const { images, image, username, email, password } = user;
+    const { images, image, firstName, lastName, username, email, password } = user;
     const formData = new FormData();
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
     formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
@@ -85,10 +87,12 @@ export const restoreUser = () => async dispatch => {
 };
 
 export const signup = (user) => async (dispatch) => {
-    const { username, email, password } = user;
+    const { firstName, lastName, username, email, password } = user;
     const response = await csrfFetch("/api/users", {
         method: "POST",
         body: JSON.stringify({
+            firstName,
+            lastName,
             username,
             email,
             password,

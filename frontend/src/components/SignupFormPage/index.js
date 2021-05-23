@@ -1,9 +1,15 @@
 // CreateUser.js file
 import { useState } from "react";
 import { createUser } from "../../store/session";
+import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import './SignupForm.css'
 
 const CreateUser = () => {
+    const history = useHistory()
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +24,7 @@ const CreateUser = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let newErrors = [];
-        dispatch(createUser({ username, email, password, image }))
+        dispatch(createUser({firstName, lastName, username, email, password, image }))
             .then(() => {
                 setUsername("");
                 setEmail("");
@@ -32,6 +38,7 @@ const CreateUser = () => {
                     setErrors(newErrors);
                 }
             });
+            history.push('/explore')
     };
 
     const updateFile = (e) => {
@@ -57,6 +64,22 @@ const CreateUser = () => {
                 <label>
                     <input
                         type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <input
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <input
+                        type="text"
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +101,7 @@ const CreateUser = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
-                <label>
+                <label> Please upload a profile picture: 
                     <input type="file" onChange={updateFile} />
                 </label>
                 {/* <label>
@@ -88,7 +111,7 @@ const CreateUser = () => {
               multiple
               onChange={updateFiles} />
           </label> */}
-                <button type="submit">Create User</button>
+                <button type="submit" >Create User</button>
             </form>
             <div>
                 {user && (

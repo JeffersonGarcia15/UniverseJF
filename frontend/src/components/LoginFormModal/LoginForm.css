@@ -1,0 +1,53 @@
+
+
+.login-submit-button {
+    height: 20px;
+    font-size: 16px;
+
+}
+.space-font {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.welcoming-text {
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-email {
+    padding-bottom: 15px;
+}
+
+.user-input {
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.user-password {
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.btn {
+    padding-top: 15px;
+}
+
+.login-btn {
+    height: 30px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.signup-redirect {
+    padding-top: 15px;
+}
+
+.redirect {
+    color: blue;
+    padding-left: 10px;
+}

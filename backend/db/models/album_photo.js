@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Album_Photo = sequelize.define('Album_Photo', {
+  const AlbumPhoto = sequelize.define('AlbumPhoto', {
     photoId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     } 
   }, {});
-  Album_Photo.associate = function(models) {
+  AlbumPhoto.associate = function(models) {
     // associations can be defined here
   };
-  return Album_Photo;
+  return AlbumPhoto;
 };
