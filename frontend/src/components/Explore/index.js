@@ -12,7 +12,7 @@ function Explore() {
     const user = useSelector(state => state.session.user);
     const photos = useSelector(state => state.photos)
 
-    // console.log('THIS IS PHOTOS', photos[1].imgUrl);
+    console.log('THIS IS PHOTOS IN EXPLORE', photos);
     
     
 
@@ -27,21 +27,21 @@ function Explore() {
     // }
     
     return (
-        <div className='explore-gallery'>
-            <div className='explore-grid-container'>
+        <div className='explore-container'>
+            <div className='photo-container'>
                 {Object.values(photos).map(photo => {
                     return (
-                        <div key={photo.id} className='photo-container'>
+                        <div key={photo.id} className='single-photo-container'>
                             <a href={`/photos/${photo.id}`}
                                 onClick={e => {
                                     e.preventDefault();
                                     history.push(`/photos/${photo.id}`)
                                 }}>
-                                <div className='photo-box'>
+                                <div className='photo-collection'>
                                     <img className='photo' src={photo.imgUrl} alt={photo.title} />
-                                    <div className='text-display'>
-                                        <p id='explore-photo-title'>{photo.title}</p>
-                                        <p id='explore-photo-user'>by {photo.User?.username}</p>
+                                    <div className='photo-info'>
+                                        <p id='photo-title'>{photo.title}</p>
+                                        <p id='photo-user'>by {photo.User.username}</p>
                                     </div>
                                 </div>
                             </a>

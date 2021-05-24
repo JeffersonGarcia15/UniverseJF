@@ -7,7 +7,10 @@ import Navigation from "./components/Navigation";
 import SplashPage from './components/SplashPage'
 import Footer from './components/Footer'
 import Explore from './components/Explore'
-import LogingFormModal from './components/LoginFormModal'
+// import LogingFormModal from './components/LoginFormModal'
+import UserProfile from './components/UserProfile'
+import UserPhotos from './components/UserPhotos'
+import UserPhoto from "./components/UserPhotos";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +32,12 @@ function App() {
           </Route>
           <Route path='/explore'>
             <Explore />
+          </Route>
+          <Route path='/profile/:userId'>
+          <UserProfile></UserProfile>
+          </Route>
+          <Route path='/photos/:photoId'>
+            <UserPhoto></UserPhoto>
           </Route>
         </Switch>
       )}

@@ -13,10 +13,10 @@ const router = express.Router();
 const validateSignup = [
   check('firstName')
     .notEmpty()
-    .withMessage('Please provide a first name.'),
+    .withMessage('Please provide a value for first name.'),
   check('lastName')
     .notEmpty()
-    .withMessage('Please provide a last name.'),
+    .withMessage('Please provide a value for last name.'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
@@ -62,8 +62,8 @@ router.post(
 );
   
 
-router.get('/id(\\d+)', asyncHandler(async(req, res) => {
-  const { id } = parseInt(req.params.id, 10)
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id, 10)
   const user = await Photo.findAll({ 
     where: {
       userId: id
