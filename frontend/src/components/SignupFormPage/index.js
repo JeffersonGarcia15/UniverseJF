@@ -44,9 +44,8 @@ const CreateUser = () => {
                         setErrors(newErrors);
                     }
                 });
-
-        }   
             history.push('/explore')
+        }   
             return setErrors(['Password field and confirm password fields do not match'])
     };
 

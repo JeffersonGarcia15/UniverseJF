@@ -13,30 +13,37 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <>
+      <div className='container'>
+      <a href="/explore">
+        <i className="fas fa-meteor"></i>
+      </a>
+      </div>
       <ProfileButton user={sessionUser} />
+      </>
     );
   } else {
     sessionLinks = (
       <>
+        <div className='container'>
+          <a href="/">
+            <i className="fas fa-meteor"></i>
+          </a>
+        </div>
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/signup" className='sign-up'>Sign Up</NavLink>
+        <Demo></Demo>
       </>
     );
   }
 
   return (
-      <div className="navbar-container">
-        <div className='container'>
-        <i className="fas fa-home"></i>
-        <NavLink exact to="/">Home</NavLink>
-        </div>
-        <div className="isLoaded"></div>
+    <>
+      <div className='isLoaded'>
         {isLoaded && sessionLinks}
-      <div className="demo-user">
-        <Demo></Demo>
+        {/* <Demo></Demo> */}
       </div>
-
-      </div>
+    </>
 
   );
 }

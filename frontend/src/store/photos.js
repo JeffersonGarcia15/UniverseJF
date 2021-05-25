@@ -53,10 +53,11 @@ export default function photosReducer(state = initialState, action) {
     let updatedState = {...state}
     switch (action.type) {
         case LOAD_ALL_PHOTOS: {
+            const newState = {}
             action.photos.forEach(photo => {
-                updatedState[photo.id] = photo
+                newState[photo.id] = photo
             })
-            return updatedState
+            return newState
         }
         case LOAD_SINGLE_PHOTO: {
             updatedState[action.photo.id] = action.photo

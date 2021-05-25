@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Album = sequelize.define('Album', {
     title: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     description: {
       type: DataTypes.STRING
@@ -15,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Album.associate = function(models) {
     Album.belongsTo(models.User, { foreignKey: 'userId'})
     const columnMapping = {
-      through: 'Album_Photo',
+      through: 'AlbumPhoto',
       otherKey: 'photoId',
       foreignKey: 'albumId',
       onDelete: 'CASCADE'

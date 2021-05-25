@@ -1,4 +1,32 @@
-.navbar-container {
+.isLoaded {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 0 0 10px 0;
+    padding: 15px;
+    background-color: #18181b;
+    /* color: white; */
+}
+
+/* .container {
+    font-size: 25px;
+} */
+
+.fas {
+    display: flex;
+    align-content: flex-start;
+    /* height: 100px; */
+    font-size: 25px;
+    /* color: white; */
+}
+
+a {
+    text-decoration: none;
+    /* color: white; */
+}
+
+.sign-up {
+    /* background-color: white; */
+    color: black;
+    padding: 10px 10px;
 }

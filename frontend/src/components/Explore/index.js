@@ -38,11 +38,16 @@ function Explore() {
                                     history.push(`/photos/${photo.id}`)
                                 }}>
                                 <div className='photo-collection'>
-                                    <img className='photo' src={photo.imgUrl} alt={photo.title} />
-                                    <div className='photo-info'>
+                                    <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
+                                    <div className='photo-title'>
                                         <p id='photo-title'>{photo.title}</p>
-                                        <p id='photo-user'>by {photo.User.username}</p>
+                                        {/* <p id='photo-user'>by {photo.User?.username}</p> */}
                                     </div>
+                                </div>
+                            </a>
+                            <a href={`/profile/${photo?.User.id}`}>
+                                <div>
+                                    <p id='photo-user'>by {photo.User?.username}</p>
                                 </div>
                             </a>
                         </div>
