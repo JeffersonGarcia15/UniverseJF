@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsersPhotos } from '../../store/photos';
+import  ProfileNavBar  from '../ProfileNavBar'
 import './UserProfile.css'
 
 function UserProfile() {
@@ -38,22 +39,7 @@ function UserProfile() {
 
     return (
         <React.Fragment>
-            <div className='profile-container'>
-                <div className='user-info'>
-                    <div className='user-fullName'>
-                        <img src={user.profileImageUrl} alt="profile" className='userProfile' />
-                        <p className='followers'>{user.username} 0 followers 1 following {photoInfo.length} photo(s)</p>
-                    </div>
-                    <div className='extra-info'>
-                        <p>{user.firstName} {user.lastName}</p>
-
-                    </div>
-                </div>
-                <div className='navBars'>
-                    <a className='tag' href={`/profile`} onClick={photostreamNavBar}>Photostream</a>
-                    <a className='tag' href={`/profile/${userId}/albums`} onClick={albumsNavBar}>Albums</a>
-                </div>
-            </div>
+            <ProfileNavBar></ProfileNavBar>
             <div className='explore-container'>
                 <div className='photo-container'>
                     {Object.values(photos).map(photo => {
@@ -82,12 +68,12 @@ function UserProfile() {
                     })}
                 </div>
             </div>
-            <div className='profile-side-container'>
+            {/* <div className='profile-side-container'>
                 <div className='profile-avatar'>
 
                 </div>
 
-            </div>
+            </div> */}
         </React.Fragment>
     )
 }

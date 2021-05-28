@@ -17,19 +17,19 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-      <div className='containers'>
-      <a href="/explore">
-        <i className="fas fa-meteor"></i>
-      </a>
-      </div>
-      <div className='container-name'>
-        <div className='profile-btn'>
-      <ProfileButton user={sessionUser} />
+        <div className='containers'>
+          <a href="/explore">
+            <i className="fas fa-meteor"></i>
+          </a>
+        </div>
+        <div className='container-name'>
+          <div className='profile-btn'>
+            <ProfileButton user={sessionUser} />
+
+          </div>
+          <PhotoUploadModal></PhotoUploadModal>
 
         </div>
-      <PhotoUploadModal></PhotoUploadModal>
-
-      </div>
 
       </>
     );
@@ -43,9 +43,9 @@ function Navigation({ isLoaded }) {
         </div>
         {/* <UserForm/> */}
         <div className='containers-botones'>
-        <NavLink to="/auth" className='sign-up'>Sign Up/Log in</NavLink>
-        <Demo></Demo>
-          
+          <NavLink to="/auth" className='sign-up'>Sign Up/Log in</NavLink>
+          <Demo></Demo>
+
         </div>
       </>
     );

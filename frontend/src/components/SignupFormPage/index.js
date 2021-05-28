@@ -78,7 +78,7 @@ const CreateUser = () => {
     return (
         <div>
             {errors.length > 0 &&
-                errors.map((error) => <div key={error}>{error}</div>)}
+                errors.map((error) => <div className='errors' key={error}>{error}</div>)}
             <form onSubmit={handleSubmit}>
                 <div className="signup-content">
                     <div className="input-group">

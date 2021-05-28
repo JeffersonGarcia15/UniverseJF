@@ -142,4 +142,8 @@ background: #009cff;
       color: rgba(255,255,255, .7);
   }
 
-  
+  .errors {
+      color: tomato;
+      text-align: center;
+      padding: 10px 0;
+  }

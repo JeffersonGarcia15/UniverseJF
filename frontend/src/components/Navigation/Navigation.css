@@ -1,9 +1,10 @@
 .isLoaded {
     display: flex;
-    width: 100vw;
+    width: 100%;
     justify-content: space-between;
-    /* margin: 0 0 10px 0; */
+    margin: 0;
     padding: 15px;
+    box-sizing: border-box;
     background-color: #18181b;
     color: white;
 }
@@ -28,9 +29,19 @@ a {
 }
 
 .sign-up {
-    background-color: white;
-    color: black;
-    padding: 5px 5px;
+    outline: none;
+    color: rgba(255, 255, 255, .7);
+    height: 100%;
+    border: none;
+    background: none;
+    font-family: 'Viga', sans-serif;
+    font-size: 18px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.sign-up:hover{
+  box-shadow: inset 0 -3px 0 #3e70bb;
 }
 
 .profile-dropdown {
@@ -38,10 +49,12 @@ a {
   flex-direction: column;
   position: absolute;
   background-color: white;
-  min-width: 160px;
+  width: 105px;
   padding: 12px 0;
-  margin-left: 60px; 
-  margin-bottom: 240px
+  right: 1%;
+  z-index: 100;
+  /* margin-left: 60px; 
+  margin-bottom: 240px */
 }
 
 .profile, .logout {
@@ -73,11 +86,11 @@ a {
     font
 } */
 
-.demo-btn {
+/* .demo-btn {
     font-size: 25px;
     padding: 10px;
     background-color: white;
-}
+} */
 
 .fa-meteor {
     display: flex;

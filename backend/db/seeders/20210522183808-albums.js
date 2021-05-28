@@ -4,6 +4,8 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Albums',  [
       { title: 'Earth Siblings', description: 'A short list of planets similar to Earth', userId: 1 },
+      { title: 'Galaxies', description: 'A collection of galaxies', userId: 1},
+      { title: 'Random planets', description: 'A collection of random planets', userId: 1},
       {title: 'My favorite planet', description: null, userId: 2},
       { title: 'A planet', description: 'Just a planet that looks like earth', userId: 3 }
     ])

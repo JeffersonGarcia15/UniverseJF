@@ -1,6 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Viga&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
-/* .profile-container{
+.profile-container{
   position: relative;
   width: 100%;
   height: 200px;
@@ -93,4 +93,4 @@ margin-left: 0;
 .tag:hover,
 .active{
   box-shadow: inset 0 -3px 0 #3e70bb;
-} */
+}

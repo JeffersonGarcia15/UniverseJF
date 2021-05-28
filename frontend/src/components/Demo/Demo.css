@@ -8,3 +8,15 @@
     flex-direction: row;
     justify-content: center;
 }
+
+.demo-btn {
+    outline: none;
+    color: rgba(255, 255, 255, .7);
+    height: 100%;
+    border: none;
+    background: none;
+    font-family: 'Viga', sans-serif;
+    font-size: 18px;
+    padding: 10px 30px;
+    cursor: pointer;
+}

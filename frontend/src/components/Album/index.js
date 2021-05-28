@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getUserAlbums, addSingleUserAlbum } from '../../store/albums';
+import ProfileNavBar from '../ProfileNavBar'
 import './Albums.css'
-import '../UserProfile/UserProfile.css'
+// import '../UserProfile/UserProfile.css'
 
 function Albums() {
     const history = useHistory()
@@ -48,22 +49,7 @@ function Albums() {
 
     return (
         <div className='background'>
-            <div className='profile-contenedor'>
-                <div className='user-info'>
-                    <div className='user-fullName'>
-                        <img src={user.profileImageUrl} alt="profile" className='userProfile' />
-                        <p className='followers'>{user.username} 0 followers 1 following {photoInfo.length} photo(s)</p>
-                    </div>
-                    <div className='extra-info'>
-                        <p>{user.firstName} {user.lastName}</p>
-
-                    </div>
-                </div>
-                <div className='navBars'>
-                    <a className='tag' href={`/profile`} onClick={photostreamNavBar}>Photostream</a>
-                    <a className='tag' href={`/profile/${userId}/albums`} onClick={albumsNavBar}>Albums</a>
-                </div>
-            </div>
+            <ProfileNavBar></ProfileNavBar>
             <div className='new'>
                 <button onClick={() => setShowForm(true)}>New Album</button>
             </div>
@@ -83,27 +69,28 @@ function Albums() {
                         <div>
                             <h4>{album.description}</h4>
                         </div>
-                        {album.Photos && album.Photos.map(photo => {
-                            return (
-                                <div className='explore-container'>
-                                    <div className='photo-container'>
-                                <div key={photo.id} className='single-photo-container'>
-                                    <a href={`/photos/${photo.id}`}>
-                                        <div className='photo-collection'> 
-                                            <img src={photo.imgUrl} alt={photo.title} className='photo-info' />
-                                        <div className='photo-title'>
-                                            <p className='user-photo-title'>{photo.description}</p>
-                                            </div>
+                        <div className='explore-container'>
+                            <div className='photo-container'>
+                                {album.Photos && album.Photos.map(photo => {
+                                    return (
+                                        <div key={photo.id} className='single-photo-container'>
+                                            <a href={`/photos/${photo.id}`}>
+                                                <div className='photo-collection'>
+                                                    <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
+                                                    <div className='photo-title'>
+                                                        <p className='user-photo-title'>{photo.title}</p>
+                                                        {/* <p className='photo-user'>by {photo.User?.username}</p> */}
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
 
-                                    </div>
-                                </div>
-                            )
-                        })}
+                                    )
+                                })}
+                            </div>
+                        </div>
                     </div>
-                    )
+                )
 
             })}
         </div>
