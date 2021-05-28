@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+/* Contenedor referencial */
+.userForm-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://i.ibb.co/sV1wczn/45403.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Viga', sans-serif;
+}
+
+/* Hidde form */
+.hidden{
+    display: none;
+}
+/* Contenedor padre */
+.userForm-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 500px;
+    height: auto;
+    padding: 20px;
+    backdrop-filter: blur(20px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* title Page */
+.welcoming-text>h1 {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 26px;
+    text-align: center;
+    /* font-style: italic; */
+    margin: 0;
+}
+
+.welcoming-text>h1::before {
+    content: "\f753";
+    font-family: "Font Awesome 5 Free";
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 26px;
+    padding-right: 5px;
+}
+
+/* Horizontal Line */
+.h-line {
+    width: 85%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 20px 0;
+}
+/* button switch */
+.btn-switch-group{
+    margin-bottom: 10px;
+}
+.btn-switch-login,
+.btn-switch-signup {
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    background: #009cff;
+    font-size: 16px;
+    font-family: 'Viga', sans-serif;
+    text-transform: uppercase;
+}
+.btn-switch-login {
+    border-radius: 15px 0 0 15px;   
+}
+.btn-switch-signup {
+    border-radius: 0 15px 15px 0;
+}
+
+.active{
+    background: transparent !important;
+    box-shadow: none !important;  
+    color: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+.btn-switch-login:hover {
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease-out;
+}
+.btn-switch-signup:hover {
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-out;
+}

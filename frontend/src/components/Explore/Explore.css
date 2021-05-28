@@ -1,0 +1,71 @@
+.explore-container {
+  display: flex;
+  justify-content: center;
+  background-color: lightgray;
+  padding-top: 20px;
+}
+
+.photo-container {
+  columns: 3 200px;
+  column-gap: 12px;
+  width: 80vw;
+  margin: 30px;
+}
+
+.single-photo-container {
+  display: inline-block;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.single-photo-container:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+/* photo hover display photo info */
+.photo-collection {
+  position: relative;
+  color: transparent;
+}
+
+.photo-info {
+  display: block;
+  width: 100%; 
+  height: auto;
+  /* opacity:1; */
+  transition: 0.5s ease;
+  
+}
+
+
+.photo-collection:hover, .user-photo-title:hover, .photo-user:hover {
+  opacity: 0.5;
+   color: skyblue;
+  font-size: 15px;
+}
+
+.photo-collection:hover .photo-title {
+  opacity: 1;
+}
+
+.photo-title {
+    top: 40%;
+    left: 35%;
+  transition: 0.5s ease;
+  position: absolute;
+}
+
+.user-photo-title {
+  font-weight: bold;
+}
+
+/* .user-photo-title:hover, .photo-user:hover {
+  color: black;
+  font-size: 15px;
+} */
+
+
+

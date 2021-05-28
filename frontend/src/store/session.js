@@ -18,12 +18,14 @@ const removeUser = () => {
 };
 
 export const createUser = (user) => async (dispatch) => {
-    const { images, image, firstName, lastName, username, email, password } = user;
+    const { images, image, firstName, lastName, username, email, password, imgUrl } = user;
     const formData = new FormData();
     formData.append('firstName', firstName)
     formData.append('lastName', lastName)
     formData.append("username", username);
     formData.append("email", email);
+    formData.append('image', image)
+    formData.append('imgUrl', imgUrl)
     formData.append("password", password);
 
     // for multiple files
@@ -87,7 +89,7 @@ export const restoreUser = () => async dispatch => {
 };
 
 export const signup = (user) => async (dispatch) => {
-    const { firstName, lastName, username, email, password } = user;
+    const { firstName, lastName, username, email, password, imgUrl } = user;
     const response = await csrfFetch("/api/users", {
         method: "POST",
         body: JSON.stringify({
@@ -96,6 +98,7 @@ export const signup = (user) => async (dispatch) => {
             username,
             email,
             password,
+            imgUrl
         }),
     });
     const data = await response.json();

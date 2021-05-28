@@ -1,0 +1,29 @@
+.comments-container {
+    background-color: #f3f5f6;
+}
+.boton-comentario {
+    background-color: #006dac;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.boton-comentario:hover, .buton-plane:hover {
+    cursor: pointer;
+    border-color: #006dac;
+    background-color: darkblue;
+}
+.fa-paper-plane, .fa-trash-restore-alt {
+    color: white;
+    font-weight: bold;
+}
+
+.buton-plane {
+    background-color: #006dac;
+    font-size: 10px;
+    
+}
+
+textarea {
+    resize: none;
+}

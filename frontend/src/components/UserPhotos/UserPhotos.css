@@ -1,0 +1,26 @@
+.componente-foto {
+    padding: 50px;
+    background-color: #212124;
+    display: flex;
+    justify-content: center;
+}
+.single-photo {
+    width: 35%;
+    height: 35%;
+}
+
+.color-fondo {
+    background-color: #f3f5f6;
+    padding-left: 25px;
+
+}
+
+.photo-owner {
+    padding-left: 15px;
+}
+
+.h3-size {
+    font-size: 25px;
+}
+
+/* color: #006dac; */

@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
+/* Floting Label */
+.input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.input-group>.input-floting {
+    position: relative;
+    margin: 30px 20px 5px 20px;
+}
+.input-group>.form-control {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    height: 35px;
+    font-size: 16px;
+    font-family: 'Viga', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+}
+
+.input-group>.form-control+label {
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all .2s ease-out;
+}
+
+.input-group>.form-control:focus {
+    outline: none;
+    border-color: #009cff;
+    transition: all .2s ease-out;
+}
+
+.input-group>.form-control:focus+label,
+.has-value+label {
+    top: -15px;
+    color: #009cff;
+    font-size: 12px;
+}
+
+.pw-icon {
+    position: absolute;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+    top: 10px;
+    right: 3px;
+    z-index: 2;
+}
+
+.pw-icon:hover {
+    color: #fff;
+}
+
+.uploadFile{
+    width: 100%;
+}
+.uploadFile > input[type='file']{
+padding: 10px 5px;
+background: #009cff;
+}
+.uploadFile > span{
+   font-size: 12px;
+   color: rgba(255, 255, 255, 0.7);
+}
+
+/* button submit*/
+.signup-btn {
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: #009cff;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Viga', sans-serif;
+    margin: 30px 0 20px 0;
+
+}
+
+.signup-btn:hover {
+    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transition: all .2s ease-out;
+}
+
+.inputfile-box {
+    position: relative;
+    margin: 30px 20px 5px 20px;  
+  }
+  
+  .inputfile {
+    display: none;
+  }
+  
+  .container {
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .file-box {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 5px 5px 5px 30%;
+    box-sizing: border-box;
+    height: 32.2px;
+    color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+  }
+  
+  .file-button {
+    cursor: pointer;
+    background: #009cff;
+    color: rgba(255,255,255, .7);
+    padding: 6px 10px 6px 6px;
+    position: absolute;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    top: 0px;
+    left: 0px;
+  }
+  
+  .file-button::before{
+      content: '\f093';
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900;
+      padding-right: 10px;
+      color: rgba(255,255,255, .7);
+  }
+
+  

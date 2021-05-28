@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPhotos } from '../../store/photos';
 import './Explore.css'
 
-console.log('!getAllPhotos Action',getAllPhotos);
+// console.log('!getAllPhotos Action',getAllPhotos);
 
 function Explore() {
     const history = useHistory()
@@ -12,7 +12,7 @@ function Explore() {
     const user = useSelector(state => state.session.user);
     const photos = useSelector(state => state.photos)
 
-    console.log('THIS IS PHOTOS IN EXPLORE', photos);
+    // console.log('THIS IS PHOTOS IN EXPLORE', photos);
     
     
 
@@ -20,11 +20,11 @@ function Explore() {
         dispatch(getAllPhotos())
     }, [dispatch])
 
-    // if (!user) {
-    //     return (
-    //         <Redirect to='/login'></Redirect>
-    //     )
-    // }
+    if (!user) {
+        return (
+            <Redirect to='/auth'></Redirect>
+        )
+    }
     
     return (
         <div className='explore-container'>
@@ -40,16 +40,16 @@ function Explore() {
                                 <div className='photo-collection'>
                                     <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
                                     <div className='photo-title'>
-                                        <p id='photo-title'>{photo.title}</p>
-                                        {/* <p id='photo-user'>by {photo.User?.username}</p> */}
+                                        <p className='user-photo-title'>{photo.title}</p>
+                                        <p className='photo-user'>by {photo.User?.username}</p>
                                     </div>
                                 </div>
                             </a>
-                            <a href={`/profile/${photo?.User.id}`}>
+                            {/* <a href={`/profile/${photo?.User.id}`}>
                                 <div>
                                     <p id='photo-user'>by {photo.User?.username}</p>
                                 </div>
-                            </a>
+                            </a> */}
                         </div>
                     )
                 })}

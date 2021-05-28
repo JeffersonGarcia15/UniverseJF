@@ -1,0 +1,104 @@
+.explore-container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-container {
+  columns: 3 200px;
+  column-gap: 12px;
+  width: 80vw;
+  margin: 30px;
+}
+
+.single-photo-container {
+  display: inline-block;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.single-photo-container:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+/* photo hover display photo info */
+.photo-collection {
+  position: relative;
+  color: transparent;
+}
+
+.photo-info {
+  display: block;
+  width: 100%; 
+  height: auto;
+  /* opacity:1; */
+  transition: 0.5s ease;
+  
+}
+
+
+.photo-collection:hover, .user-photo-title:hover, .photo-user:hover {
+  opacity: 0.5;
+   color: skyblue;
+  font-size: 15px;
+}
+
+.photo-collection:hover .photo-title {
+  opacity: 1;
+}
+
+.photo-title {
+    top: 40%;
+    left: 35%;
+  transition: 0.5s ease;
+  position: absolute;
+}
+
+.user-photo-title {
+  font-weight: bold;
+}
+
+.profile-contenedor {
+    padding: 15px 0px;
+
+}
+
+.user-info {
+    display: flex;
+    /* justify-content: space-between; */
+    /* font-size: 20px; */
+}
+
+.followers {
+    font-size: 14px;
+}
+
+.userProfile {
+    width: 150px;
+    border-radius: 100px;
+}
+
+.navBars {
+    border: 1px solid rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 14px;
+    width: 100vw;
+    padding: 10px 0;
+}
+
+.user-fullName {
+    padding-left: 14px;
+}
+
+.tag {
+    text-decoration: none;
+    color: grey
+}
+
+.album, .new {
+  background-color: lightgray;
+
+}

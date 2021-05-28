@@ -1,12 +1,24 @@
 // CreateUser.js file
 import { useState } from "react";
 import { createUser } from "../../store/session";
-import * as sessionActions from "../../store/session";
+// import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
+import usePaswordToggle from '../../context/UserForm/UsePasswordToggle'
 import './SignupForm.css'
 
 const CreateUser = () => {
+    function FloatingEvt(evt) {
+        if (evt.target.value.length > 0) {
+            evt.target.classList.add('has-value')
+        } else {
+            evt.target.classList.remove('has-value')
+        }
+    }
+    const [showPassword, showConfirmPass] = usePaswordToggle();
+    const [PwInputType, IconPass] = showPassword();
+    const [PwConfirmInputType, IconPassConfirm] = showConfirmPass();
+    const [filename, setFilename] = useState("Upload a profile picture...");
     const history = useHistory()
 
     const [firstName, setFirstName] = useState("");
@@ -20,7 +32,7 @@ const CreateUser = () => {
     //   const [images, setImages] = useState([]);
     const [errors, setErrors] = useState([]);
 
-    
+
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     if (user) return <Redirect to="/"></Redirect>
@@ -30,7 +42,7 @@ const CreateUser = () => {
         if (password === confirmPassword) {
             setErrors([])
             let newErrors = [];
-            dispatch(createUser({firstName, lastName, username, email, password, image }))
+            dispatch(createUser({ firstName, lastName, username, email, password, image }))
                 // .then(() => {
                 //     setUsername("");
                 //     setEmail("");
@@ -45,13 +57,16 @@ const CreateUser = () => {
                     }
                 });
             history.push('/explore')
-        }   
-            return setErrors(['Password field and confirm password fields do not match'])
+        }
+        return setErrors(['Password field and confirm password fields do not match'])
     };
 
     const updateFile = (e) => {
         const file = e.target.files[0];
-        if (file) setImage(file);
+        if (file) {
+            setFilename(file.name)
+            setImage(file);
+        }
     };
 
     // for multiple file upload
@@ -62,74 +77,56 @@ const CreateUser = () => {
 
     return (
         <div>
-            <h1>AWS S3 Express-React Demo</h1>
             {errors.length > 0 &&
                 errors.map((error) => <div key={error}>{error}</div>)}
-            <form
-                style={{ display: "flex", flexFlow: "column" }}
-                onSubmit={handleSubmit}
-            >
-                <label>
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <input
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </label>
-                <div id='floatContainer' className='float-container'>
-                    <label>Confirm Password</label>
-                    <input
-                        className='floatField'
-                        type='password'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
+            <form onSubmit={handleSubmit}>
+                <div className="signup-content">
+                    <div className="input-group">
+                        <div className="input-floting">
+                            <input type="text" className="form-control" onBlur={FloatingEvt} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <label htmlFor="">First Name</label>
+                        </div>
+                        <div className="input-floting">
+                            <input type="text" className="form-control" onBlur={FloatingEvt} value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <label htmlFor="">Last Name</label>
+                        </div>
+                    </div>
+
+                    <div className="input-group">
+                        <div className="input-floting">
+                            <input type="text" className="form-control" onBlur={FloatingEvt} value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <label htmlFor="">Username</label>
+                        </div>
+                        <div className="input-floting">
+                            <input type="email" className="form-control" onBlur={FloatingEvt} value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <label htmlFor="">Email</label>
+                        </div>
+                    </div>
+                    <div className="input-group">
+                        <div className="input-floting">
+                            <input type={PwInputType} className="form-control" onBlur={FloatingEvt} value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <label htmlFor="">Password</label>
+                            <span>{IconPass}</span>
+                        </div>
+                        <div className="input-floting">
+                            <input type={PwConfirmInputType} className="form-control" onBlur={FloatingEvt} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <label htmlFor="">Confirm password</label>
+                            <span>{IconPassConfirm}</span>
+                        </div>
+                    </div>
+                    <div className="inputfile-box">
+                        <input type="file" id="file" className="inputfile"
+                            accept="image/*"
+                            onChange={updateFile} />
+                        <label htmlFor="file">
+                            <span id="file-name" className="file-box">{filename}</span>
+                            <span className="file-button">
+                                Select File
+                                </span>
+                        </label>
+                    </div>
+                    <button type="submit" className="signup-btn" >Create User</button>
                 </div>
-                <label> Please upload a profile picture: 
-                    <input type="file" onChange={updateFile} />
-                </label>
-                {/* <label>
-            Multiple Upload
-            <input 
-              type="file"
-              multiple
-              onChange={updateFiles} />
-          </label> */}
-                <button type="submit" >Create User</button>
             </form>
             <div>
                 {user && (

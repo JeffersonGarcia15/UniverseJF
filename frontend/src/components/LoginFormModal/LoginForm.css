@@ -1,4 +1,4 @@
-
+/* 
 
 .login-submit-button {
     height: 20px;
@@ -50,4 +50,86 @@
 .redirect {
     color: blue;
     padding-left: 10px;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+/* Floting Label */
+.input-floating {
+    position: relative;
+    width: 400px;
+    margin: 40px auto;
+}
+.form-control {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 35px;
+    font-size: 16px;
+    font-family: 'Viga', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+}
+.form-control+label {
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all .2s ease-out;
+    
+}
+.form-control:focus {
+    outline: none;
+    border-color: #009cff;
+    transition: all .2s ease-out;
+}
+.form-control:focus+label,
+.has-value+label {
+    top: -15px;
+    color: #009cff;
+    font-size: 12px;
+}
+.pw-icon{
+    position: absolute;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+    top: 10px;
+    right: 3px;
+    z-index: 2;
+}
+.pw-icon:hover{
+color: #fff;
+}
+.form-control:focus + .pw-icon{
+    color: #009cff;
+}
+/* button submit*/
+.login-btn {
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    background: #009cff;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Viga', sans-serif;
+}
+.login-btn:hover{
+    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transition: all .2s ease-out;
+}
+.signup-redirect{
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+.redirect{
+    text-decoration: none;
+    color: #009cff;
 }

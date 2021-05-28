@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import Demo from '../Demo'
-import images from './images'
+// import { useSelector } from 'react-redux'
+// import { Redirect } from 'react-router-dom';
+// import Demo from '../Demo'
+// import images from './images'
 import './SplashPage.css'
 
 function SplashPage() {
@@ -21,12 +21,10 @@ function SplashPage() {
 
     return (
         <div className="splash-page">
-            <script src="/public/script.js"></script>
-            <div className='welcome-message'>
-                <h1 className='greetings'>
-                    Welcome to UniverseJF!
+            <h1 className='greetings'>
+                Welcome to UniverseJF!
                 </h1>
-            </div>
+                <h2 className='message'>Join us as a registered user or use a demo to test the website!</h2>
         </div>
     )
 }

@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     }
     Photo.belongsToMany(models.Album, columnMapping)
+    Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete:'CASCADE', hooks: true} )
   };
+
 
   Photo.uploadImage = async function (title, description, imgUrl, userId) {
     const photo = await Photo.create({
