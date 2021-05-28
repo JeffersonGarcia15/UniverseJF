@@ -6,12 +6,10 @@ import './PhotoUpload.css'
 
 function PhotoUpload() {
     const dispatch = useDispatch()
-    const history = useHistory()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [imgUrl, setImgUrl] = useState(null)
     const [showMenu, setShowMenu] = useState(false)
-    const [errors, setErrors] = useState([])
     const sessionUser = useSelector(state => state.session.user)
 
     const openMenu = () => {
@@ -31,23 +29,6 @@ function PhotoUpload() {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
-
-    // const onSubmit = async (e) => {
-    //     e.preventDefault()
-    //     const uploadPhoto = {
-    //         title,
-    //         description,
-    //         imgUrl,
-    //         userId: sessionUser.id
-    //     }
-    //     const newSinglePhoto = await dispatch(uploadSinglePhoto(uploadPhoto))
-    //     setTitle('')
-    //     setDescription('')
-    //     setImgUrl('')
-    //     history.push(`/photos/${newSinglePhoto.id}`)
-
-
-    // }
 
     const onSubmit = async (e) => {
         e.preventDefault();

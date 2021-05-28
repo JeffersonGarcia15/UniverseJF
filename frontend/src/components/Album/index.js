@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getUserAlbums, addSingleUserAlbum } from '../../store/albums';
 import ProfileNavBar from '../ProfileNavBar'
 import './Albums.css'
 // import '../UserProfile/UserProfile.css'
 
 function Albums() {
-    const history = useHistory()
     const dispatch = useDispatch()
     const { userId } = useParams()
     const user = useSelector(state => state.session.user)
@@ -15,10 +14,6 @@ function Albums() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [showForm, setShowForm] = useState(false)
-    const photos = useSelector(state => state.photos)
-
-    const photoInfo = Object.values(photos)
-
 
     // console.log('THIS IS ALBUMS', albums);
 
@@ -36,15 +31,6 @@ function Albums() {
         dispatch(addSingleUserAlbum(albumObject))
         setTitle('')
         setDescription('')
-    }
-    const photostreamNavBar = e => {
-        e.preventDefault();
-        history.push(`/profile/${userId}`);
-    }
-
-    const albumsNavBar = e => {
-        e.preventDefault();
-        history.push(`/profile/${userId}/albums`);
     }
 
     return (
