@@ -3,6 +3,8 @@ import { csrfFetch } from './csrf'
 const LOAD_ALL_ALBUMS = 'albums/LOAD_ALL_ALBUMS'
 const ADD_SINGLE_ALBUM = 'albums/ADD_SINGLE_ALBUM'
 const ADD_TO_ALBUM = 'albums/ADD_TO_ALBUM'
+const UPDATE_SINGLE_ALBUM = 'albums/UPDATE_SINGLE_ALBUM'
+const DELETE_SINGLE_ALBUM = 'albums/DELETE_SINGLE_ALBUM'
 
 
 export const loadAlbums = albums => {
@@ -22,6 +24,19 @@ export const addSingleAlbum = album => {
 export const addPhotoToAlbum = album => {
     return {
         type: ADD_TO_ALBUM,
+        album
+    }
+}
+export const updateSingleAlbum = (album) => {
+    return {
+        type: UPDATE_SINGLE_ALBUM,
+        album
+    }
+}
+
+export const deleteAlbum = album => {
+    return {
+        type: DELETE_SINGLE_ALBUM,
         album
     }
 }
@@ -64,6 +79,29 @@ export const addSingleUserAlbum = albumInfo => async dispatch => {
     }
 }
 
+export const updateAlbum = (title, description, albumId) => async dispatch => {
+    const response = await csrfFetch(`/api/albums/user/${albumId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({title, description})
+    })
+    if (response.ok) {
+        const updatedAlbum = await response.json()
+        dispatch(updateSingleAlbum(updatedAlbum))
+    }
+}
+
+export const deleteSingleAlbum = albumId => async dispatch => {
+    const response = await csrfFetch(`/api/albums/${albumId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        dispatch(deleteAlbum(albumId))
+    }
+}
+
 const initialState = {}
 
 export default function albumsReducer(state = initialState, action) {
@@ -82,6 +120,14 @@ export default function albumsReducer(state = initialState, action) {
         }
         case ADD_TO_ALBUM: {
             updatedState[action.album.albumId] = action.album
+            return updatedState
+        }
+        case UPDATE_SINGLE_ALBUM: {
+            updatedState[action.album.id] = action.album
+            return updatedState
+        }
+        case DELETE_SINGLE_ALBUM: {
+            delete updatedState[action.album]
             return updatedState
         }
         default:

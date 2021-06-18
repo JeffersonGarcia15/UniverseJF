@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../Modal';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from 'react-router-dom'
 // import { useHistory } from 'react-router-dom';
 import { uploadSinglePhoto } from '../../store/photos';
+import { addUserPhotoToAlbum, getUserAlbums } from '../../store/albums'
 import './PhotoUploadModal.css'
 
-function PhotoUploadModal({ user }) {
+function PhotoUploadModal() {
         const dispatch = useDispatch()
         // const history = useHistory()
+        const { userId } = useParams()
         const [title, setTitle] = useState('')
         const [description, setDescription] = useState('')
         const [imgUrl, setImgUrl] = useState(null)
         const [showMenu, setShowMenu] = useState(false)
+        const [addPhotoAlbum, setAddPhotoAlbum] = useState('')
+        const albums = useSelector(state => state.albums)
+        const photo = useSelector(state => state.photos)
+
         // const [errors, setErrors] = useState([])
         const sessionUser = useSelector(state => state.session.user)
+
+    useEffect(() => {
+        dispatch(getUserAlbums(sessionUser.id))
+    }, [dispatch, sessionUser.id])
 
         const openMenu = () => {
             if (showMenu) return;
@@ -49,6 +60,14 @@ function PhotoUploadModal({ user }) {
 
 
         // }
+    const addPhotoToAlbum = async e => {
+        e.preventDefault();
+        const addSinglePhotoToAlbum = {
+            photoId: userId,
+            albumId: addPhotoAlbum
+        }
+        dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
+    }
 
         const onSubmit = async (e) => {
             e.preventDefault();
@@ -81,6 +100,18 @@ function PhotoUploadModal({ user }) {
                         <input placeholder='Title' className='title' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                         <input placeholder='Description' className='description' type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                         <input  className='photo-upload' type="file" onChange={updateFile} />
+                                {/* <form onSubmit={addPhotoToAlbum}> */}
+                                    <input type="hidden" value={photo.id} disabled></input>
+                                        <select value={addPhotoAlbum} onChange={(e) => setAddPhotoAlbum(e.target.value)}>
+                                            <option value="">Choose an Album</option>
+                                            {Object.values(albums).map(album => {
+                                                return (
+                                                    <option key={album.id} value={album.id}>{album.title}</option>
+                                                )
+                                            })}
+                                        </select>
+                                    <button type='button' formAction={addPhotoToAlbum}>Add</button>
+                                {/* </form> */}
                         <button className='btn' type='submit'>Submit</button>
                     </form>
 

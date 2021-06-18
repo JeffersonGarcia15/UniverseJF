@@ -58,5 +58,27 @@ router.get('/user/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     return res.json(albums)
 }))
 
+router.put('/user/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const albumId = parseInt(req.params.id, 10)
+    const { title, description } = req.body
+    const album = await Album.findOne({
+        where: {
+            id: albumId
+        }
+    })
+    await album.update({
+        title,
+        description
+    })
+    return res.json(album)
+}))
+
+
+router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const albumId = parseInt(req.params.id, 10)
+    const album = await Album.findByPk(albumId)
+    await album.destroy()
+    res.status(204).end()
+}))
 
 module.exports = router

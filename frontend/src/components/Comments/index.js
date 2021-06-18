@@ -68,26 +68,26 @@ function Comments() {
             {Object.values(comments).map(comment => {
                 return (
                     <div key={comment.id} className='comments-container'>
-                    <div>
                         <div>
-                            <p>{comment.User?.firstName}</p>
-                            <p>{comment.body}</p>
-                            {user.id === comment.userId && (
-                                <div>
-                                    <button className='boton-comentario' onClick={() => openForm(comment)} >Edit Comment</button>
+                            <div>
+                                <p>{comment.User?.firstName}</p>
+                                <p>{comment.body}</p>
+                                {user.id === comment.userId && (
+                                    <div>
+                                        <button className='boton-comentario' onClick={() => openForm(comment)} >Edit Comment</button>
 
-                                {showForm && comment.id === formId ? 
-                                <form onSubmit={(e) => editComment(comment.id, body, e)} key={comment.id}>
-                                    <input type="text" value={body} onChange={(e) => setBody(e.target.value)} />
-                                        <button className='buton-plane' type='submit' onSubmit={(e) => editComment(comment.id, body, e)}>
+                                        {showForm && comment.id === formId ?
+                                            <form onSubmit={(e) => editComment(comment.id, body, e)} key={comment.id}>
+                                                <input type="text" value={body} onChange={(e) => setBody(e.target.value)} />
+                                                <button className='buton-plane' type='submit' onSubmit={(e) => editComment(comment.id, body, e)}>
                                                     <i className="fas fa-paper-plane"></i></button>
                                                 <button className='buton-plane' onClick={() => deleteComment(comment.id)}><i className="fas fa-trash-restore-alt"></i></button>
-                                </form>
-                                : null}
-                                </div>
+                                            </form>
+                                            : null}
+                                    </div>
                                 )}
+                            </div>
                         </div>
-                    </div>
                     </div>
                 )
             })}
@@ -95,7 +95,7 @@ function Comments() {
                 <form onSubmit={userComment}>
                     <textarea className='text-area-comment' value={newComment} onChange={(e) => setNewComment(e.target.value)} cols="30" rows="10"></textarea>
                     <div>
-                    <button className='boton-comentario' type='submit'>Submit</button>
+                        <button className='boton-comentario' type='submit'>Submit</button>
 
                     </div>
                 </form>
