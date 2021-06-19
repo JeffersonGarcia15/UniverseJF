@@ -41,10 +41,12 @@ router.post('/new', requireAuth, asyncHandler(async (req, res) => {
 
 router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { photoId, albumId } = req.body;
-    await AlbumPhoto.create({
+    const albumInfo = await AlbumPhoto.create({
         photoId,
         albumId
     })
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------', albumInfo);
+    return res.json(albumInfo)
 }))
 
 router.get('/user/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {

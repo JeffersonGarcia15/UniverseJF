@@ -6,7 +6,7 @@ import { addUserPhotoToAlbum, getUserAlbums } from '../../store/albums'
 
 import './PhotoUpload.css'
 
-function PhotoUpload({photo}) {
+function PhotoUpload({ photo }) {
     const dispatch = useDispatch()
     const { userId } = useParams()
     const [title, setTitle] = useState('')
@@ -39,24 +39,29 @@ function PhotoUpload({photo}) {
     }, [showMenu]);
 
 
-    const addPhotoToAlbum = async e => {
+    // const addPhotoToAlbum = async e => {
+    //     // e.preventDefault();
+    //     // const addSinglePhotoToAlbum = {
+    //     //     photoId: userId,
+    //     //     albumId: addPhotoAlbum
+    //     // }
+    //     // dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
+    // }
+
+    const onSubmit = async (e) => {
         e.preventDefault();
+        setShowMenu(false)
         const addSinglePhotoToAlbum = {
             photoId: userId,
             albumId: addPhotoAlbum
         }
+
+        await dispatch(uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id }))
         dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
-    }
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-
-        await dispatch(uploadSinglePhoto({title, description, imgUrl, userId: sessionUser.id}))
-        setShowMenu(false)
-            // .catch(async (res) => {
-            //     if (res.data && res.data.errors) setErrors(res.data.errors);
-            // });
-            // history.push('/')
+        // .catch(async (res) => {
+        //     if (res.data && res.data.errors) setErrors(res.data.errors);
+        // });
+        // history.push('/')
     };
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -70,27 +75,27 @@ function PhotoUpload({photo}) {
             </button>
             {showMenu && (
                 <form onSubmit={onSubmit}>
-            <h4>Upload Your Photo</h4>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-                <input type="file" onChange={updateFile} />
-                <form onSubmit={addPhotoToAlbum}>
-                    <input type="hidden" value={photo.userId}>
-                        <select value={addPhotoAlbum} onChange={(e) => setAddPhotoAlbum(e.target.value)}>
-                            <option value="">Choose an Album</option>
+                    <h4>Upload Your Photo</h4>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <input type="file" onChange={updateFile} />
+                    {/* <form onSubmit={addPhotoToAlbum}> */}
+                        <input type="hidden" value={photo.userId}>
+                            <select value={addPhotoAlbum} onChange={(e) => setAddPhotoAlbum(e.target.value)}>
+                                <option value="">Choose an Album</option>
                                 {Object.values(albums).map(album => {
                                     return (
                                         <option key={album.id} value={album.id}>{album.name}</option>
                                     )
                                 })}
-                        </select>
+                            </select>
 
-                    </input>
-                    
+                        </input>
+
+                    {/* </form> */}
+                    <button type='submit'>Submit</button>
                 </form>
-                <button type='submit'>Submit</button>
-            </form>
-                )}
+            )}
             {/* <button type='submit'>Submit Photo</button> */}
         </div>
     )

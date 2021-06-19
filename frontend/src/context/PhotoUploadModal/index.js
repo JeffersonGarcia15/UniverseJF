@@ -16,8 +16,11 @@ function PhotoUploadModal() {
         const [imgUrl, setImgUrl] = useState(null)
         const [showMenu, setShowMenu] = useState(false)
         const [addPhotoAlbum, setAddPhotoAlbum] = useState('')
+        const [photoId, setPhotoId] = useState(null)
         const albums = useSelector(state => state.albums)
         const photo = useSelector(state => state.photos)
+        console.log('------------------------', photo[0].id);
+
 
         // const [errors, setErrors] = useState([])
         const sessionUser = useSelector(state => state.session.user)
@@ -60,20 +63,27 @@ function PhotoUploadModal() {
 
 
         // }
-    const addPhotoToAlbum = async e => {
-        e.preventDefault();
-        const addSinglePhotoToAlbum = {
-            photoId: userId,
-            albumId: addPhotoAlbum
-        }
-        dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
-    }
+    // const addPhotoToAlbum = async e => {
+    //     e.preventDefault();
+    //     const addSinglePhotoToAlbum = {
+    //         photoId: userId,
+    //         albumId: addPhotoAlbum
+    //     }
+    //     dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
+    // }
 
         const onSubmit = async (e) => {
             e.preventDefault();
 
             await dispatch(uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id }))
             setShowMenu(false)
+            // e.preventDefault();
+            const addSinglePhotoToAlbum = {
+                photoId: 58,
+                albumId: addPhotoAlbum
+            }
+            console.log('+++++++++++++++++++++++++++',addSinglePhotoToAlbum);
+            await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
             // .catch(async (res) => {
             //     if (res.data && res.data.errors) setErrors(res.data.errors);
             // });
@@ -110,7 +120,7 @@ function PhotoUploadModal() {
                                                 )
                                             })}
                                         </select>
-                                    <button type='button' formAction={addPhotoToAlbum}>Add</button>
+                                    {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
                                 {/* </form> */}
                         <button className='btn' type='submit'>Submit</button>
                     </form>

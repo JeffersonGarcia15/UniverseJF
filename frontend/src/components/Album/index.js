@@ -17,6 +17,7 @@ function Albums() {
     const [newDescription, setNewDescription] = useState('')
     const [newAlbum, setNewAlbum] = useState('')
     const [showForm, setShowForm] = useState(false)
+    const [newShowForm, setNewShowForm] = useState(false)
     const [formId, setFormId] = useState(null)
     const history = useHistory()
 
@@ -104,9 +105,9 @@ function Albums() {
         <div className='background'>
             <ProfileNavBar></ProfileNavBar>
             <div className='new'>
-                <button onClick={() => setShowForm(true)}>New Album</button>
+                <button onClick={() => setNewShowForm(true)}>New Album</button>
             </div>
-            {showForm && (
+            {newShowForm && (
                 <form onSubmit={createAlbum}>
                     <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
                     <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)} cols="30" rows="10"></textarea>
@@ -129,8 +130,8 @@ function Albums() {
                                         <button onClick={() => openForm(album)}>Edit Album</button>
                                         {showForm && album.id === formId ?
                                             <form onSubmit={(e) => editAlbum(album.id, title, description, e)} key={album.id} >
-                                                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                                                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}>Edit Description</input>
+                                                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                                                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                                                 <button type='submit' onSubmit={(e) => editAlbum(album.id, title, description, e)}>Edit Title</button>
                                                 <button onClick={() => deleteAlbum(album.id)}>Delete Album</button>
                                                 {/* <button></button> */}
@@ -143,18 +144,18 @@ function Albums() {
                         <div className='explore-container'>
                             <div className='photo-container'>
                                 {album.Photos && (
-                                    
-                                        <div key={album.Photos[0]?.id} className='single-photo-container'>
-                                            <a href={`/albums/${album.id}`}>
-                                                <div className='photo-collection'>
-                                                    <img className='photo-info' src={album.Photos[0]?.imgUrl} alt={album.Photos[0]?.title} />
-                                                    <div className='photo-title'>
-                                                        <p className='user-photo-title'>{album.Photos[0]?.title}</p>
-                                                        {/* <p className='photo-user'>by {photo.User?.username}</p> */}
-                                                    </div>
+
+                                    <div key={album.Photos[0]?.id} className='single-photo-container'>
+                                        <a href={`/albums/${album.id}`}>
+                                            <div className='photo-collection'>
+                                                <img className='photo-info' src={album.Photos[0]?.imgUrl} alt={album.Photos[0]?.title} />
+                                                <div className='photo-title'>
+                                                    <p className='user-photo-title'>{album.Photos[0]?.title}</p>
+                                                    {/* <p className='photo-user'>by {photo.User?.username}</p> */}
                                                 </div>
-                                            </a>
-                                        </div>
+                                            </div>
+                                        </a>
+                                    </div>
 
                                 )
                                 }
