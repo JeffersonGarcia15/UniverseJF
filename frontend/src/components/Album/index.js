@@ -20,6 +20,7 @@ function Albums() {
     const [formId, setFormId] = useState(null)
     const history = useHistory()
 
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', albums);
 
 
     //     < div >
@@ -141,22 +142,22 @@ function Albums() {
                         </div>
                         <div className='explore-container'>
                             <div className='photo-container'>
-                                {album.Photos && album.Photos.map(photo => {
-                                    return (
-                                        <div key={photo.id} className='single-photo-container'>
-                                            <a href={`/photos/${photo.id}`}>
+                                {album.Photos && (
+                                    
+                                        <div key={album.Photos[0]?.id} className='single-photo-container'>
+                                            <a href={`/albums/${album.id}`}>
                                                 <div className='photo-collection'>
-                                                    <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
+                                                    <img className='photo-info' src={album.Photos[0]?.imgUrl} alt={album.Photos[0]?.title} />
                                                     <div className='photo-title'>
-                                                        <p className='user-photo-title'>{photo.title}</p>
+                                                        <p className='user-photo-title'>{album.Photos[0]?.title}</p>
                                                         {/* <p className='photo-user'>by {photo.User?.username}</p> */}
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
 
-                                    )
-                                })}
+                                )
+                                }
                             </div>
                         </div>
                     </div>

@@ -14,6 +14,7 @@ import UserPhoto from "./components/UserPhotos";
 import Albums from './components/Album'
 import NotFound from './components/NotFound'
 import UserForm from './components/UserForm'
+import UserAlbums from './components/UserAlbums'
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route exact path='/profile/:userId/albums'>
             <Albums></Albums>
+          </Route>
+          <Route exact path='/albums/:albumId'>
+            <UserAlbums></UserAlbums>
           </Route>
           <Route>
             <NotFound></NotFound>

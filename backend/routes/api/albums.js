@@ -58,6 +58,14 @@ router.get('/user/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     return res.json(albums)
 }))
 
+router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+    const albumId = parseInt(req.params.id, 10)
+    const album = await Album.findByPk(albumId, {
+        include: Photo
+    })
+    return res.json(album)
+}))
+
 router.put('/user/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const albumId = parseInt(req.params.id, 10)
     const { title, description } = req.body

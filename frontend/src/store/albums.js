@@ -5,6 +5,7 @@ const ADD_SINGLE_ALBUM = 'albums/ADD_SINGLE_ALBUM'
 const ADD_TO_ALBUM = 'albums/ADD_TO_ALBUM'
 const UPDATE_SINGLE_ALBUM = 'albums/UPDATE_SINGLE_ALBUM'
 const DELETE_SINGLE_ALBUM = 'albums/DELETE_SINGLE_ALBUM'
+const LOAD_SINGLE_ALBUM = 'albums/LOAD_SINGLE_ALBUM'
 
 
 export const loadAlbums = albums => {
@@ -37,6 +38,13 @@ export const updateSingleAlbum = (album) => {
 export const deleteAlbum = album => {
     return {
         type: DELETE_SINGLE_ALBUM,
+        album
+    }
+}
+
+export const loadSingleAlbum = album => {
+    return {
+        type: LOAD_SINGLE_ALBUM,
         album
     }
 }
@@ -99,6 +107,14 @@ export const deleteSingleAlbum = albumId => async dispatch => {
     })
     if (response.ok) {
         dispatch(deleteAlbum(albumId))
+    }
+}
+
+export const getSingleUserAlbum = (albumId) => async dispatch => {
+    const response = await csrfFetch(`/api/albums/${albumId}`)
+    if (response.ok) {
+        const album = await response.json()
+        dispatch(loadSingleAlbum(album))
     }
 }
 
