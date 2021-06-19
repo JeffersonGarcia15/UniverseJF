@@ -17,16 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     }
   }, {});
-  Photo.associate = function(models) {
-    Photo.belongsTo(models.User, { foreignKey: 'userId'})
+  Photo.associate = function (models) {
+    Photo.belongsTo(models.User, { foreignKey: 'userId' })
     const columnMapping = {
-      through: 'Album_Photo',
+      through: 'AlbumPhoto',
       otherKey: 'albumId',
       foreignKey: 'photoId',
       onDelete: 'CASCADE'
     }
     Photo.belongsToMany(models.Album, columnMapping)
-    Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete:'CASCADE', hooks: true} )
+    Photo.hasMany(models.AlbumPhoto, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true})
+    Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
   };
 
 

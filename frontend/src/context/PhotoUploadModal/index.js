@@ -19,7 +19,23 @@ function PhotoUploadModal() {
         const [photoId, setPhotoId] = useState(null)
         const albums = useSelector(state => state.albums)
         const photo = useSelector(state => state.photos)
-        console.log('------------------------', photo[0].id);
+        let idOfPhoto = (Object.keys(photo)[Object.keys(photo).length - 1])
+        let intIdOfPhoto = parseInt(idOfPhoto, 10) + 1
+
+        // Object.size = function(obj) {
+        //     let size = 0,
+        //     key;
+        //     for (key in obj) {
+        //         if (obj.hasOwnProperty(key)) size++
+        //     }
+        //     return size
+        // }
+        // let size = Object.size(photo)
+        // photo = Object.values(photo).map()
+        console.log('------------------------', Object.keys(photo).length);
+        console.log('000000000000000', photo);
+        console.log('****************************', Object.values(photo)[0]);
+        console.log('############################', intIdOfPhoto)
 
 
         // const [errors, setErrors] = useState([])
@@ -79,7 +95,7 @@ function PhotoUploadModal() {
             setShowMenu(false)
             // e.preventDefault();
             const addSinglePhotoToAlbum = {
-                photoId: 58,
+                photoId: intIdOfPhoto,
                 albumId: addPhotoAlbum
             }
             console.log('+++++++++++++++++++++++++++',addSinglePhotoToAlbum);
@@ -122,7 +138,7 @@ function PhotoUploadModal() {
                                         </select>
                                     {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
                                 {/* </form> */}
-                        <button className='btn' type='submit'>Submit</button>
+                                <button className='btn' type='submit' onClick={() => console.log(photo.id)}>Submit</button>
                     </form>
 
                     </Modal>
