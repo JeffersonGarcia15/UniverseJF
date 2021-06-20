@@ -57,7 +57,7 @@ export const updateComment = (body, commentId) => async dispatch => {
 }
 
 export const createComment = comment => async dispatch => {
-    const response = await  csrfFetch(`/api/comments/photos/${comment.photoId}`, {
+    const response = await csrfFetch(`/api/comments/photos/${comment.photoId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
