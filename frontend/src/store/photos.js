@@ -72,6 +72,7 @@ export const getUsersPhotos = userId => async dispatch => {
     }
 }
 
+
 export const uploadSinglePhoto = (singlePhoto) => async dispatch => {
     // const response = await csrfFetch(`/api/photos/new`, {
     //     method: 'POST',
