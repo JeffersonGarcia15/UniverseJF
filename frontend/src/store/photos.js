@@ -53,7 +53,7 @@ export const getAllPhotos = () => async dispatch => {
 }
 
 export const getSingleUserPhoto = (photoId) => async dispatch => {
-    const response = await fetch(`/api/photos/${photoId}`)
+    const response = await csrfFetch(`/api/photos/${photoId}`)
     if (response.ok) {
         const photo = await response.json()
         // console.log('photo from photos in store folder', photo);
