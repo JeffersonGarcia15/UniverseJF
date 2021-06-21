@@ -30,6 +30,15 @@ module.exports = (sequelize, DataTypes) => {
     Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
   };
 
+  const tagMapping = { 
+    through: 'Tag_Photo',
+    otherKey: 'tagId',
+    foreignKey: 'photoId', 
+    onDelete: 'CASCADE'
+  }
+
+  Photo.belongsToMany(models.Tag, tagMapping)
+
 
   Photo.uploadImage = async function (title, description, imgUrl, userId) {
     const photo = await Photo.create({
