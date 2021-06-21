@@ -1,7 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
 const { requireAuth } = require('../../utils/auth')
-const { User, Photo, Comment} = require('../../db/models');
+const { User, Photo, Comment, Tag} = require('../../db/models');
 const { singleMulterUpload, singlePublicFileUpload} = require('../../awsS3');
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.get('/', asyncHandler(async (req, res) => {
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     const photoId = parseInt(req.params.id, 10)
     const photo = await Photo.findByPk(photoId, {
-        include: User
+        include: [User, Tag]
     })
     return res.json(photo)
 }))

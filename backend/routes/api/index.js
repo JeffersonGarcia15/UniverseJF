@@ -4,6 +4,7 @@ const usersRouter = require('./users.js');
 const photosRouter = require('./photos')
 const albumsRouter = require('./albums')
 const commentsRouter = require('./comments')
+const tagsRouter = require('./tag')
 
 router.use('/session', sessionRouter);
 
@@ -14,6 +15,8 @@ router.use('/photos', photosRouter)
 router.use('/albums', albumsRouter)
 
 router.use('/comments', commentsRouter)
+
+router.use('/tags', tagsRouter)
 
 router.post('/test', function (req, res) {
     res.json({ requestBody: req.body });
