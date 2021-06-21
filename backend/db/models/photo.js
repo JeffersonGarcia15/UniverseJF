@@ -29,16 +29,17 @@ module.exports = (sequelize, DataTypes) => {
     Photo.hasMany(models.AlbumPhoto, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true})
     Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
     Photo.hasMany(models.Tag_Photo, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
+    
+    const tagMapping = { 
+      through: 'Tag_Photo',
+      otherKey: 'tagId',
+      foreignKey: 'photoId', 
+      onDelete: 'CASCADE'
+    }
+  
+    Photo.belongsToMany(models.Tag, tagMapping)
   };
 
-  const tagMapping = { 
-    through: 'Tag_Photo',
-    otherKey: 'tagId',
-    foreignKey: 'photoId', 
-    onDelete: 'CASCADE'
-  }
-
-  Photo.belongsToMany(models.Tag, tagMapping)
 
 
   Photo.uploadImage = async function (title, description, imgUrl, userId) {

@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
     session: sessionReducer,
     photos: photosReducer,
     albums: albumsReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
+    tags = tagsReducer
 });
 
 
