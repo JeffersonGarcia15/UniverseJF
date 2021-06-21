@@ -21,7 +21,7 @@ router.get('/photos/:id(\\d+)', asyncHandler(async (req, res) => {
 }))
 
 
-router.post('/new)', requireAuth, asyncHandler(async (req, res) => {
+router.post('/new', requireAuth, asyncHandler(async (req, res) => {
     // const photoId = parseInt(req.params.id, 10)
     const { name } = req.body
     const newTag = await Tag.create({

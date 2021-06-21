@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom'
 // import { useHistory } from 'react-router-dom';
 import { uploadSinglePhoto } from '../../store/photos';
 import { addUserPhotoToAlbum, getUserAlbums } from '../../store/albums'
-import { addUserTagToPhoto, getEveryTag } from '../../store/tags'
+import { addUserTagToPhoto, getEveryTag, createTag } from '../../store/tags'
 import './PhotoUploadModal.css'
 
 function PhotoUploadModal() {
@@ -14,11 +14,14 @@ function PhotoUploadModal() {
     const { userId } = useParams()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    // const [name, setName]
     const [imgUrl, setImgUrl] = useState(null)
     const [showMenu, setShowMenu] = useState(false)
     const [addPhotoAlbum, setAddPhotoAlbum] = useState('')
     const [addTagPhoto, setAddTagPhoto] = useState('')
+    const [addTag, setAddTag] = useState('')
     const [photoId, setPhotoId] = useState(null)
+    const [name, setName] = useState('')
     const albums = useSelector(state => state.albums)
     const photo = useSelector(state => state.photos)
     const tags = useSelector(state => state.tags)
@@ -106,19 +109,20 @@ function PhotoUploadModal() {
         e.preventDefault();
 
         await dispatch(uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id }))
+        // await dispatch(createTag({name}))
         setShowMenu(false)
         // e.preventDefault();
         const addSinglePhotoToAlbum = {
             photoId: intIdOfPhoto,
             albumId: addPhotoAlbum
         }
-        const addTagToPhoto = {
-            photoId: addTagPhoto,
-            tagId: intIdOfTag
-            }
+        // const addTagToPhoto = {
+        //     photoId: addTagPhoto,
+        //     tagId: intIdOfTag
+        //     }
         console.log('+++++++++++++++++++++++++++', addSinglePhotoToAlbum);
         await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
-        await dispatch(addUserTagToPhoto())
+        // await dispatch(addUserTagToPhoto(addTagToPhoto))
         // .catch(async (res) => {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
         // });
@@ -155,6 +159,9 @@ function PhotoUploadModal() {
                                     )
                                 })}
                             </select>
+                            {/* <textarea value={name} onChange={(e) => setName(e.target.value)}>
+                                {/* <li value={addTag} onChange={(e) => setAddTag(e.target.value)}></li> */}
+                            {/* </textarea> */}
                             {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
                             {/* </form> */}
                             <button className='btn' type='submit' onClick={() => console.log(photo.id)}>Submit</button>
