@@ -12,8 +12,11 @@ function UserPhoto() {
     const { photoId } = useParams()
     const user = useSelector(state => state.session.user)
     const photo = useSelector(state => state.photos[photoId])
+    const tags = photo?.Tags
     // console.log('photo from UserPhotos in components', photo);
     // console.log('This is photoId', photoId)
+    console.log('THIS IS TAGS??????????????', photo);
+    // console.log('@@@@@@@@@@@@@@@@@@@@@@@', tags.map);
 
     useEffect(() => {
         dispatch(getSingleUserPhoto(photoId))
@@ -31,6 +34,20 @@ function UserPhoto() {
                     <a href={`/profile/${photo?.User.id}`} onClick={e => { e.preventDefault(); history.push(`/profile/${photo?.User.id}`) }}>{photo?.User.firstName}</a>
                     <h3 className='h3-size'>{photo?.title}</h3>
                     <p>{photo?.description}</p>
+                    <div>
+                        {tags?.map(function(tag, idx) {
+                            return (
+                                <div key={idx}>{tag.name}</div>
+                            )
+                        })}
+                            {/* {photo.Tags[0].name} */}
+                            {/* <p>{photo.Tags[0].name}</p> */}
+                            {/* {photo.Tags?.map(tag => {
+                                <div>{tag.name}</div>
+                                // <button onClick={() => console.log('QUEB))))))))))))))))))))))))))', tag.name)}>JONASSSSSSSS</button>
+                            })} */}
+                            {/* <button onClick={() => console.log('QUEB))))))))))))))))))))))))))',photo.Tags[0].name)}>JONASSSSSSSS</button> */}
+                    </div>
                 </div>
             </div>
             <div>

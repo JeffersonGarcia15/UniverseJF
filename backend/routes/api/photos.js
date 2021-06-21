@@ -6,7 +6,7 @@ const { singleMulterUpload, singlePublicFileUpload} = require('../../awsS3');
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
-    const photos = await Photo.findAll({ include: User })
+    const photos = await Photo.findAll({ include: [User, Tag] })
     return res.json(photos);
 }))
 
