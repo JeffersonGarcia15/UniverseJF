@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     Photo.belongsToMany(models.Album, columnMapping)
     Photo.hasMany(models.AlbumPhoto, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true})
     Photo.hasMany(models.Comment, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
+    Photo.hasMany(models.Tag_Photo, { foreignKey: 'photoId', onDelete: 'CASCADE', hooks: true })
   };
 
   const tagMapping = { 

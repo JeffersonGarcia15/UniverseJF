@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('TagPhotos', [
+    return queryInterface.bulkInsert('Tag_Photos', [
       { photoId: 1, tagId: 1 },
       { photoId: 2, tagId: 2 },
       { photoId: 3, tagId: 3 },
@@ -14,6 +14,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('TagPhotos', null, {})
+    return queryInterface.bulkDelete('Tag_Photos', null, {})
   }
 };

@@ -1,7 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Tag = sequelize.define('Tag', {
-    name: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {});
   Tag.associate = function(models) {
     const columnMapping = {
@@ -11,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     }
     Tag.belongsToMany(models.Photo, columnMapping)
+    
   };
   return Tag;
 };

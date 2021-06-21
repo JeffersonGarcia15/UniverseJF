@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Tag_Photo.associate = function(models) {
-    // associations can be defined here
+    Tag_Photo.belongsTo(models.Photo, { foreignKey: 'photoId' })
   };
   return Tag_Photo;
 };
