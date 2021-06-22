@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { getSingleUserPhoto } from '../../store/photos';
-import { addUserLikeToPhoto, getAllLikes } from '../../store/likes'
+import { addUserLikeToPhoto, getAllLikes, deleteSingleLike } from '../../store/likes'
 import Comments from '../Comments'
 import UpdateDelePhoto from '../UpdateDeletePhoto'
 import './UserPhotos.css'
@@ -41,6 +41,11 @@ function UserPhoto() {
         await dispatch(addUserLikeToPhoto(addSingleLikeToPhoto))
     }
 
+    const dislike = async (e) => {
+        e.preventDefault()
+        dispatch(deleteSingleLike(tags.id))
+    }
+
     return (
         <div className='photo--component'>
             <div className='componente-foto'>
@@ -56,7 +61,8 @@ function UserPhoto() {
                                     <i className="fas fa-paper-plane"></i></button>
                         </form> */}
                             <button className='buton-plane' type='submit' onClick={addLike}>
-                                <i className="fas fa-paper-plane"></i></button>
+                                <i className="fas fa-thumbs-up"></i></button>
+                            <button onClick={dislike}><i className="far fa-thumbs-down"></i></button>
                     </div>
                         <div className='photo-owner'>
                             <a href={`/profile/${photo?.User.id}`} onClick={e => { e.preventDefault(); history.push(`/profile/${photo?.User.id}`) }}>{photo?.User.firstName}</a>

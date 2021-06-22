@@ -30,6 +30,13 @@ router.get('/photos/:id(\\d+)', asyncHandler(async (req, res) => {
     return res.json(likes)
 }))
 
+router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const likeId = parseInt(req.params.id, 10)
+    const deleteLike = await Like.findByPk(likeId)
+    await deleteLike.destroy()
+    res.status.end(204)
+}))
+
 module.exports = router
 
 
