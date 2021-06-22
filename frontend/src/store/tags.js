@@ -71,6 +71,7 @@ export const addUserTagToPhoto = photoInfo => async dispatch => {
     })
     if (response.ok) {
         const photo = await response.json()
+        // console.log('COMING FROM STORE TAGS ADDUSERTAGTOPHOTO', photoInfo);
         dispatch(addTagToPhoto(photo))
     }
 }

@@ -29,7 +29,8 @@ function PhotoUploadModal() {
     let intIdOfPhoto = parseInt(idOfPhoto, 10) + 1
     let idOfTag = (Object.keys(tags)[Object.keys(tags).length - 1])
     let intIdOfTag = parseInt(idOfTag, 10) + 1
-
+    const tagList = photo[intIdOfPhoto - 1]?.Tags?.push((Object.values(tags)[Object.values(tags).length - 1]))
+    const tag = photo[intIdOfPhoto - 1]?.Tags
     // let idOfTag =
 
         // Object.size = function(obj) {
@@ -47,7 +48,9 @@ function PhotoUploadModal() {
         // console.log('****************************', Object.values(photo)[0]);
         // console.log('############################', intIdOfPhoto)
         console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', photo);
-    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', tags);
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^TAGSSSSSSS', tags);
+        console.log(';;;;;;;;;;;;;;;;;;;;;', tagList);
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~', tag);
 
 
     // const [errors, setErrors] = useState([])
@@ -108,21 +111,22 @@ function PhotoUploadModal() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        await dispatch(createTag({name}))
         await dispatch(uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id }))
-        // await dispatch(createTag({name}))
         setShowMenu(false)
         // e.preventDefault();
         const addSinglePhotoToAlbum = {
             photoId: intIdOfPhoto,
             albumId: addPhotoAlbum
         }
-        // const addTagToPhoto = {
-        //     photoId: addTagPhoto,
-        //     tagId: intIdOfTag
-        //     }
+        const addTagToPhoto = {
+            photoId: addTagPhoto,
+            tagId: intIdOfTag
+            }
         console.log('+++++++++++++++++++++++++++', addSinglePhotoToAlbum);
+        await dispatch(addUserTagToPhoto(addTagToPhoto))
         await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
-        // await dispatch(addUserTagToPhoto(addTagToPhoto))
+        console.log('?????????????????????????????/', dispatch(addUserTagToPhoto(addTagToPhoto)));
         // .catch(async (res) => {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
         // });
@@ -148,7 +152,8 @@ function PhotoUploadModal() {
                             <h4 className='upload'>Upload Your Photo</h4>
                             <input placeholder='Title' className='title' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                             <input placeholder='Description' className='description' type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-                            <input className='photo-upload' type="file" onChange={updateFile} />
+
+                            <input className='photo-upload' type="file" accept="image/png, image/gif, image/jpeg" onChange={updateFile} />
                             {/* <form onSubmit={addPhotoToAlbum}> */}
                             <input type="hidden" value={photo.id} disabled></input>
                             <select value={addPhotoAlbum} onChange={(e) => setAddPhotoAlbum(e.target.value)}>
@@ -159,9 +164,10 @@ function PhotoUploadModal() {
                                     )
                                 })}
                             </select>
-                            {/* <textarea value={name} onChange={(e) => setName(e.target.value)}>
+                             <textarea value={name} onChange={(e) => setName(e.target.value)}>
                                 {/* <li value={addTag} onChange={(e) => setAddTag(e.target.value)}></li> */}
-                            {/* </textarea> */}
+                                <input type="text" value={tagList} onChange={(e) => setAddTagPhoto(e.target.value)}></input>
+                             </textarea> 
                             {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
                             {/* </form> */}
                             <button className='btn' type='submit' onClick={() => console.log(photo.id)}>Submit</button>
