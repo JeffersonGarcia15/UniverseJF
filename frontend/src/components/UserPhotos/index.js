@@ -14,11 +14,22 @@ function UserPhoto() {
     const user = useSelector(state => state.session.user)
     const photo = useSelector(state => state.photos[photoId])
     const likes = useSelector(state => state.likes)
+    const likesMapping = Object.values(likes)
     const tags = photo?.Tags
     // console.log('photo from UserPhotos in components', photo);
     // console.log('This is photoId', photoId)
     console.log('THIS IS TAGS??????????????', photo);
     console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', likes);
+    console.log('LIIIIIIKEEEESSSSMAAPPIIIIIINNNNNGGGGG', likesMapping.map(like => {
+        console.log('SOME INFO HERE ABOUT LIKE', like.id);
+    }));
+    const likeDescription = useSelector(state => Object.values(state.likes))
+    // const likeMapping = likeDescription.map(like => {
+    //     like
+    // })
+    console.log('JjjjjjjjJJJJJJjjjJJJJJJJJjjjjjjJJjJ', likeDescription.map(like => {
+        console.log('aqui va el like', like)
+    }));
     // console.log('===============================', photo?.Likes?.length);
     // const totalLikes = (Object.keys(photo)[Object.keys(photo).length - 1])
     // console.log('@@@@@@@@@@@@@@@@@@@@@@@', tags.map);
@@ -43,7 +54,10 @@ function UserPhoto() {
 
     const dislike = async (e) => {
         e.preventDefault()
-        dispatch(deleteSingleLike(tags.id))
+        likeDescription.map(like => {
+            dispatch(deleteSingleLike(like.id))
+            console.log('*******************************', like.id)
+        })
     }
 
     return (
