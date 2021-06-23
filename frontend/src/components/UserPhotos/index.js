@@ -16,13 +16,17 @@ function UserPhoto() {
     const likes = useSelector(state => state.likes)
     const likesMapping = Object.values(likes)
     const tags = photo?.Tags
+    const likeId = Object.values(likes).find(like => like.userId == user.id && like.photoId == photoId)
+    const deleteLike = parseInt(likeId?.id, 10)
+    console.log('RRRRRRRIIIIIAAAATTTTTAAAAAA', deleteLike);
     // console.log('photo from UserPhotos in components', photo);
     // console.log('This is photoId', photoId)
     console.log('THIS IS TAGS??????????????', photo);
-    console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', likes);
+    console.log('😭😭😭', likes);
     console.log('LIIIIIIKEEEESSSSMAAPPIIIIIINNNNNGGGGG', likesMapping.map(like => {
         console.log('SOME INFO HERE ABOUT LIKE', like.id);
     }));
+    console.log('USSSSSSSEEEEEEEEEERRRRRRRRRR', user);
     const likeDescription = useSelector(state => Object.values(state.likes))
     // const likeMapping = likeDescription.map(like => {
     //     like
@@ -54,10 +58,7 @@ function UserPhoto() {
 
     const dislike = async (e) => {
         e.preventDefault()
-        likeDescription.map(like => {
-            dispatch(deleteSingleLike(like.id))
-            console.log('*******************************', like.id)
-        })
+        await dispatch(deleteSingleLike(deleteLike))
     }
 
     return (
@@ -76,7 +77,7 @@ function UserPhoto() {
                         </form> */}
                             <button className='buton-plane' type='submit' onClick={addLike}>
                                 <i className="fas fa-thumbs-up"></i></button>
-                            <button onClick={dislike}><i className="far fa-thumbs-down"></i></button>
+                            <button type='submit' onClick={dislike}><i className="far fa-thumbs-down"></i></button>
                     </div>
                         <div className='photo-owner'>
                             <a href={`/profile/${photo?.User.id}`} onClick={e => { e.preventDefault(); history.push(`/profile/${photo?.User.id}`) }}>{photo?.User.firstName}</a>
