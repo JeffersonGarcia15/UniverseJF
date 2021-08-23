@@ -124,8 +124,8 @@ function PhotoUploadModal() {
             tagId: intIdOfTag
             }
         console.log('+++++++++++++++++++++++++++', addSinglePhotoToAlbum);
-        await dispatch(addUserTagToPhoto(addTagToPhoto))
         await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
+        await dispatch(addUserTagToPhoto(addTagToPhoto))
         console.log('?????????????????????????????/', dispatch(addUserTagToPhoto(addTagToPhoto)));
         // .catch(async (res) => {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
