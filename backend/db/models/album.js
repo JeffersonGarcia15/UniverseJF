@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     }
     Album.belongsToMany(models.Photo, columnMapping)
+    Album.hasMany(models.AlbumPhoto, { foreignKey: 'albumId', onDelete: 'CASCADE', hooks: true})
   };
   return Album;
 };
