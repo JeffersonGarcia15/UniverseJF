@@ -43,7 +43,7 @@ export const deletePhoto = photo => {
 
 
 export const getAllPhotos = () => async dispatch => {
-    const response = await csrfFetch('/api/photos');
+    const response = await csrfFetch('/api/photos/');
 
     if (response.ok) {
         const photos = await response.json()

@@ -31,26 +31,6 @@ function PhotoUploadModal() {
     let intIdOfTag = parseInt(idOfTag, 10) + 1
     const tagList = photo[intIdOfPhoto - 1]?.Tags?.push((Object.values(tags)[Object.values(tags).length - 1]))
     const tag = photo[intIdOfPhoto - 1]?.Tags
-    // let idOfTag =
-
-        // Object.size = function(obj) {
-        //     let size = 0,
-        //     key;
-        //     for (key in obj) {
-        //         if (obj.hasOwnProperty(key)) size++
-        //     }
-        //     return size
-        // }
-        // let size = Object.size(photo)
-        // photo = Object.values(photo).map()
-        // console.log('------------------------', Object.keys(photo).length);
-        // console.log('000000000000000', photo);
-        // console.log('****************************', Object.values(photo)[0]);
-        // console.log('############################', intIdOfPhoto)
-        console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', photo);
-        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^TAGSSSSSSS', tags);
-        console.log(';;;;;;;;;;;;;;;;;;;;;', tagList);
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~', tag);
 
 
     // const [errors, setErrors] = useState([])
@@ -123,9 +103,8 @@ function PhotoUploadModal() {
             photoId: addTagPhoto,
             tagId: intIdOfTag
             }
-        console.log('+++++++++++++++++++++++++++', addSinglePhotoToAlbum);
-        await dispatch(addUserTagToPhoto(addTagToPhoto))
         await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
+        await dispatch(addUserTagToPhoto(addTagToPhoto))
         console.log('?????????????????????????????/', dispatch(addUserTagToPhoto(addTagToPhoto)));
         // .catch(async (res) => {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
@@ -145,9 +124,6 @@ function PhotoUploadModal() {
             {showMenu && (
                 <div>
                     <Modal onClose={() => setShowMenu(false)}>
-                        {/* <div className='space-font'>
-                            <i className="fas fa-meteor"></i>
-                        </div> */}
                         <form className='form-container' onSubmit={onSubmit}>
                             <h4 className='upload'>Upload Your Photo</h4>
                             <input placeholder='Title' className='title' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />

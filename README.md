@@ -1,8 +1,8 @@
 # Welcome to UniverseJF
 
-## Live link: [UniverJF]( https://universejf.herokuapp.com/)
+## Live link: [UniverseJF]( https://universejf.herokuapp.com/)
 
-[UniverJF](https://universejf.herokuapp.com/), inspired by [flicker](https://www.flickr.com/), is a web application that allows users to post pictures of their favorite planets, galaxy or anything universe/space related. As a registered user you can post photos with tags, create albums, follow users, like photos and add comments on photos. And even if you have not registered, you can see the best pictures in the slash page.
+[UniverseJF](https://universejf.herokuapp.com/), inspired by [flicker](https://www.flickr.com/), is a web application that allows users to post pictures of their favorite planets, galaxy or anything universe/space related. As a registered user you can post photos with tags, create albums, follow users, like photos and add comments on photos. And even if you have not registered, you can see the best pictures in the slash page.
 
 #
 ## Table of content

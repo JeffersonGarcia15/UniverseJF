@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { getSingleUserPhoto } from '../../store/photos';
+import { getSingleUserPhoto, getAllPhotos } from '../../store/photos';
 import { addUserLikeToPhoto, getAllLikes, deleteSingleLike } from '../../store/likes'
 import Comments from '../Comments'
 import UpdateDelePhoto from '../UpdateDeletePhoto'
@@ -14,33 +14,17 @@ function UserPhoto() {
     const user = useSelector(state => state.session.user)
     const photo = useSelector(state => state.photos[photoId])
     const likes = useSelector(state => state.likes)
-    const likesMapping = Object.values(likes)
     const tags = photo?.Tags
     const likeId = Object.values(likes).find(like => like.userId == user.id && like.photoId == photoId)
     const deleteLike = parseInt(likeId?.id, 10)
-    console.log('RRRRRRRIIIIIAAAATTTTTAAAAAA', deleteLike);
-    // console.log('photo from UserPhotos in components', photo);
-    // console.log('This is photoId', photoId)
-    console.log('THIS IS TAGS??????????????', photo);
-    console.log('😭😭😭', likes);
-    console.log('LIIIIIIKEEEESSSSMAAPPIIIIIINNNNNGGGGG', likesMapping.map(like => {
-        console.log('SOME INFO HERE ABOUT LIKE', like.id);
-    }));
-    console.log('USSSSSSSEEEEEEEEEERRRRRRRRRR', user);
-    const likeDescription = useSelector(state => Object.values(state.likes))
-    // const likeMapping = likeDescription.map(like => {
-    //     like
-    // })
-    console.log('JjjjjjjjJJJJJJjjjJJJJJJJJjjjjjjJJjJ', likeDescription.map(like => {
-        console.log('aqui va el like', like)
-    }));
-    // console.log('===============================', photo?.Likes?.length);
-    // const totalLikes = (Object.keys(photo)[Object.keys(photo).length - 1])
-    // console.log('@@@@@@@@@@@@@@@@@@@@@@@', tags.map);
 
     useEffect(() => {
         dispatch(getSingleUserPhoto(photoId))
     }, [dispatch, photoId])
+
+    useEffect(() => {
+        dispatch(getAllPhotos())
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getAllLikes(photoId))
@@ -70,15 +54,11 @@ function UserPhoto() {
                 <div className='foto-informacion'>
                     {user.id === photo?.User.id}
                     <>
-                    <div>
-                        {/* <form onSubmit={addLike}>
-                                <button className='buton-plane' type='submit' onSubmit={(e) => editComment(comment.id, body, e)}>
-                                    <i className="fas fa-paper-plane"></i></button>
-                        </form> */}
+                        <div>
                             <button className='buton-plane' type='submit' onClick={addLike}>
                                 <i className="fas fa-thumbs-up"></i></button>
                             <button type='submit' onClick={dislike}><i className="far fa-thumbs-down"></i></button>
-                    </div>
+                        </div>
                         <div className='photo-owner'>
                             <a href={`/profile/${photo?.User.id}`} onClick={e => { e.preventDefault(); history.push(`/profile/${photo?.User.id}`) }}>{photo?.User.firstName}</a>
                             <p>{photo?.Likes?.length} Like(s)</p>
@@ -90,13 +70,6 @@ function UserPhoto() {
                                         <div key={idx}>{tag?.name}</div>
                                     )
                                 })}
-                                {/* {photo.Tags[0].name} */}
-                                {/* <p>{photo.Tags[0].name}</p> */}
-                                {/* {photo.Tags?.map(tag => {
-                                <div>{tag.name}</div>
-                                // <button onClick={() => console.log('QUEB))))))))))))))))))))))))))', tag.name)}>JONASSSSSSSS</button>
-                            })} */}
-                                {/* <button onClick={() => console.log('QUEB))))))))))))))))))))))))))',photo.Tags[0].name)}>JONASSSSSSSS</button> */}
                             </div>
                         </div>
                     </>

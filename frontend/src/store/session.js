@@ -25,7 +25,7 @@ export const createUser = (user) => async (dispatch) => {
     formData.append("username", username);
     formData.append("email", email);
     formData.append('image', image)
-    formData.append('imgUrl', imgUrl)
+    // formData.append('imgUrl', imgUrl)
     formData.append("password", password);
 
     // for multiple files
@@ -36,7 +36,7 @@ export const createUser = (user) => async (dispatch) => {
     }
 
     // for single file
-    if (image) formData.append("image", image);
+    if (imgUrl) formData.append("image", imgUrl);
 
     const res = await csrfFetch(`/api/users`, {
         method: "POST",
@@ -47,6 +47,7 @@ export const createUser = (user) => async (dispatch) => {
     });
 
     const data = await res.json();
+    console.log('What are we getting in the thunk', images, image, firstName, lastName, username, email, password, imgUrl);
     dispatch(setUser(data.user));
 };
 
