@@ -45,11 +45,6 @@ function Explore() {
                                     </div>
                                 </div>
                             </a>
-                            {/* <a href={`/profile/${photo?.User.id}`}>
-                                <div>
-                                    <p id='photo-user'>by {photo.User?.username}</p>
-                                </div>
-                            </a> */}
                         </div>
                     )
                 })}
