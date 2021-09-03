@@ -34,7 +34,8 @@ router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const likeId = parseInt(req.params.id, 10)
     const deleteLike = await Like.findByPk(likeId)
     await deleteLike.destroy()
-    res.status.end(204)
+    res.status(204).end()
+
 }))
 
 module.exports = router
