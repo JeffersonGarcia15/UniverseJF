@@ -16,13 +16,11 @@ function Comments() {
     const [showForm, setShowForm] = useState(false)
     const [formId, setFormId] = useState(null)
 
-    // const [newComment, setNewComment] = useState('')
 
     useEffect(() => {
         dispatch(getAllComments(photoId))
     }, [dispatch, photoId])
 
-    // console.log('*******', comments);
 
     const userComment = async (e) => {
         e.preventDefault()

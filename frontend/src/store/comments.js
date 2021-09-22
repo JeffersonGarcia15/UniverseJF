@@ -37,7 +37,6 @@ export const getAllComments = photoId => async dispatch => {
     const response = await csrfFetch(`/api/comments/photos/${photoId}`)
     if (response.ok) {
         const comments = await response.json()
-        // console.log('HERE IS COMMENTS FROM STORE', comments);
         dispatch(loadComments(comments))
     }
 }

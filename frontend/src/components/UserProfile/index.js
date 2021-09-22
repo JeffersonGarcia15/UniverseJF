@@ -11,21 +11,14 @@ function UserProfile() {
     const { userId } = useParams()
     const user = useSelector(state => state.session.user)
     const photos = useSelector(state => state.photos)
-    // console.log('Photos in profile', photos); //1: {id: 1, …}2: { id: 2, object with keys 1, 2
-    // // represents the same behavior as photos in Explore so Object.values should work
-    // console.log('This is id', userId);
-    // console.log('___________------______', user);
+   
     const photoInfo = Object.values(photos)
-    // console.log('AQUI PHOTOINFO', photoInfo);
 
     useEffect(() => {
         dispatch(getUsersPhotos(userId))
     }, [dispatch, userId])
 
-    // const onSubmit = (e) => {
-    //     e.preventDefault()
-    //     history.push(`/photos/${photo.id}`)
-    // }
+   
 
     const photostreamNavBar = e => {
         e.preventDefault();

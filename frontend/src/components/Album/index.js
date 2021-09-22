@@ -21,42 +21,6 @@ function Albums() {
     const [formId, setFormId] = useState(null)
     const history = useHistory()
 
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', albums);
-
-
-    //     < div >
-    // {
-    //     user.id === album.userId && (
-    //         <form onSubmit={editAlbum}>
-    //             <input type="text" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder='New Title' />
-    //             <input type="text" value={newDescription} onChange={e => setNewDescription(e.target.value)} placeholder='New Description' />
-    //             <button type='submit'>Save Updates</button>
-    //         </form>
-    //     )
-    // }
-
-
-    //                     </div >
-
-    // {
-    //     user.id === album.userId && (
-    //         <div>
-    //             <button onClick={() => openForm(album)}>Edit Album</button>
-    //             {showForm && album.id === formId ?
-    //                 <form onSubmit={(e) => editAlbum(album.id, title, e)} key={album.id} >
-    //                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-    //                     {/* <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}>Edit Description</input> */}
-    //                     <button type='submit' onSubmit={(e) => editAlbum(album.id, title, e)}>Edit Title</button>
-    //                     <button type='submit'></button>
-    //                     {/* <button></button> */}
-    //                 </form>
-    //                 : null}
-    //         </div>
-    //     )
-    // }
-
-    // console.log('THIS IS ALBUMS', albums);
-
     useEffect(() => {
         dispatch(getUserAlbums(userId))
     }, [dispatch, userId])
@@ -108,11 +72,14 @@ function Albums() {
                 <button onClick={() => setNewShowForm(true)}>New Album</button>
             </div>
             {newShowForm && (
+                <div className="newalbum">
                 <form onSubmit={createAlbum}>
-                    <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
-                    <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)} cols="30" rows="10"></textarea>
+                    <input className="inputalbum" placeholder="Title" type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} /><br/>
+                        <textarea placeholder="Description" type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} cols="30" rows="10"></textarea><br />
                     <button type='submit'>Save Album</button>
                 </form>
+
+                </div>
             )}
             {Object.values(albums).map(album => {
                 return (

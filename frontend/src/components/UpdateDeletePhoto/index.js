@@ -11,19 +11,14 @@ function UpdateDeletePhoto() {
     const photo = useSelector(state => state.photos[photoId])
     const user = useSelector(state => state.session.user)
 
-    // console.log('######THIS IS PHOTO IN UPDATEDELETE', photo);
     const [title, setTitle] = useState(photo?.title)
     const [description, setDescription] = useState(photo?.description)
 
 
-    // useEffect(() => {
-    //     dispatch(updatePhoto(photoId))
-    // }, [dispatch, photoId])
 
     const updateUserPhoto = async (e) => {
         e.preventDefault()
-        // setTitle(e.target.value)
-        // console.log('PHOTOID IN UPDATE DELETE%%%%%%', photoId);
+        
         dispatch(updatePhoto({
             title,
             description,

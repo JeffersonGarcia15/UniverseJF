@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPhotos } from '../../store/photos';
 import './Explore.css'
 
-// console.log('!getAllPhotos Action',getAllPhotos);
 
 function Explore() {
     const history = useHistory()
@@ -12,7 +11,6 @@ function Explore() {
     const user = useSelector(state => state.session.user);
     const photos = useSelector(state => state.photos)
 
-    // console.log('THIS IS PHOTOS IN EXPLORE', photos);
     
     
 
