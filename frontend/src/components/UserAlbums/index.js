@@ -22,7 +22,6 @@ function UserAlbums() {
         <div>
 
             <div className='photo-container' >
-                {/* <button onClick={() => console.log(album)}>Kiere pisar?</button> */}
                 {album?.id == albumId && album.Photos.map(photo => {
                     return (
                         <div key={photo.id} className='single-photo-container'>
@@ -31,9 +30,6 @@ function UserAlbums() {
                                     <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
                                     <div className='photo-title'>
                                         <p className='user-photo-title'>{photo.title}</p>
-                                        {/* <p className='photo-user'>by {photo.User?.username}</p> */}
-                                        {/* <button onClick={() => console.log(photo)}>Q3b0?</button> */}
-
                                     </div>
                                 </div>
                             </a>

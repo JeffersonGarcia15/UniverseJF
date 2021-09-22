@@ -47,7 +47,6 @@ export const createUser = (user) => async (dispatch) => {
     });
 
     const data = await res.json();
-    console.log('What are we getting in the thunk', images, image, firstName, lastName, username, email, password, imgUrl);
     dispatch(setUser(data.user));
 };
 

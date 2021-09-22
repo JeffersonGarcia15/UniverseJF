@@ -32,7 +32,6 @@ function PhotoUploadModal() {
     const tagList = photo[intIdOfPhoto - 1]?.Tags?.push((Object.values(tags)[Object.values(tags).length - 1]))
     const tag = photo[intIdOfPhoto - 1]?.Tags
 
-
     // const [errors, setErrors] = useState([])
     const sessionUser = useSelector(state => state.session.user)
 
@@ -99,13 +98,12 @@ function PhotoUploadModal() {
             photoId: intIdOfPhoto,
             albumId: addPhotoAlbum
         }
-        const addTagToPhoto = {
-            photoId: addTagPhoto,
-            tagId: intIdOfTag
-            }
+        // const addTagToPhoto = {
+        //     photoId: intIdOfPhoto,
+        //     tagId: intIdOfTag
+        //     }
         await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum))
-        await dispatch(addUserTagToPhoto(addTagToPhoto))
-        console.log('?????????????????????????????/', dispatch(addUserTagToPhoto(addTagToPhoto)));
+        // await dispatch(addUserTagToPhoto(addTagToPhoto))
         // .catch(async (res) => {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
         // });
@@ -140,13 +138,13 @@ function PhotoUploadModal() {
                                     )
                                 })}
                             </select>
-                             <textarea value={name} onChange={(e) => setName(e.target.value)}>
+                             {/* <textarea value={name} onChange={(e) => setName(e.target.value)}> */}
                                 {/* <li value={addTag} onChange={(e) => setAddTag(e.target.value)}></li> */}
-                                <input type="text" value={tagList} onChange={(e) => setAddTagPhoto(e.target.value)}></input>
-                             </textarea> 
+                                {/* <input type="text" value={tagList} onChange={(e) => setAddTagPhoto(e.target.value)}></input> */}
+                             {/* </textarea>  */}
                             {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
                             {/* </form> */}
-                            <button className='btn' type='submit' onClick={() => console.log(photo.id)}>Submit</button>
+                            <button className='btn' type='submit'>Submit</button>
                         </form>
 
                     </Modal>

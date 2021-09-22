@@ -7,7 +7,6 @@ const FormControl = evt => {
     const StayFloating = hasValue ? "has-value" : "";
 
     const FlotingEvt = () => {
-        // console.log(a)
         if (a !== "") {
             setFloating(true);
         } else {

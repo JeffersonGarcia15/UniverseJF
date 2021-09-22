@@ -18,7 +18,6 @@ router.get('/photos/:id(\\d+)', asyncHandler(async (req, res) => {
 router.put('/photos/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const photoId = parseInt(req.params.id, 10)
     const { body } = req.body
-    // console.log('THIS IS BODY IN BACKEND--------------', body);
     const comment = await Comment.findOne({
         where: {
             id: photoId

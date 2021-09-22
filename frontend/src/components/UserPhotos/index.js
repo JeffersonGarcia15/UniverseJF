@@ -23,14 +23,15 @@ function UserPhoto() {
     const [deleteSwitch, setDeleteSwitch] = useState(false)
     const isPhotoLiked = likesInPhoto?.some(like => like.userId === user.id)
 
-    // useEffect(() => {
-    //     dispatch(getSingleUserPhoto(photoId))
-    // }, [dispatch, photoId, photoLength])
+    useEffect(() => {
+        dispatch(getSingleUserPhoto(photoId))
+    }, [photoId])
 
     // useEffect(() => {
     //     dispatch(getAllPhotos())
     //     dispatch(getAllLikes)
     // }, [dispatch, likeId, deleteLike])
+
 
     useEffect(() => {
         dispatch(getAllLikes())

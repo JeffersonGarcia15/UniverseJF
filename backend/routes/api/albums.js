@@ -46,7 +46,6 @@ router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
         albumId
     })
     
-    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------', albumInfo);
     return res.json(albumInfo)
 }))
 

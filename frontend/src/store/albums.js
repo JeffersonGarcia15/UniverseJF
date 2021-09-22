@@ -53,7 +53,6 @@ export const getUserAlbums = userId => async dispatch => {
     const response = await csrfFetch(`/api/albums/user/${userId}`)
     if (response.ok) {
         const albums = await response.json()
-        // console.log('HERE ARE USER ALBUMS', albums);
         dispatch(loadAlbums(albums))
     }
 }

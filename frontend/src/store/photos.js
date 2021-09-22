@@ -47,7 +47,6 @@ export const getAllPhotos = () => async dispatch => {
 
     if (response.ok) {
         const photos = await response.json()
-        // console.log('Photos from my action in store', photos);
         dispatch(loadPhotos(photos))
     }
 }
@@ -56,39 +55,22 @@ export const getSingleUserPhoto = (photoId) => async dispatch => {
     const response = await csrfFetch(`/api/photos/${photoId}`)
     if (response.ok) {
         const photo = await response.json()
-        // console.log('photo from photos in store folder', photo);
         dispatch(loadSinglePhoto(photo))
     }
-    // dispatch(loadSinglePhoto(response.photo));
-    // return response.photo;
+    
 }
 
 export const getUsersPhotos = userId => async dispatch => {
     const response = await csrfFetch(`/api/users/${userId}`)
     if (response.ok) {
         const photos = await response.json()
-        // console.log('HERE WE HAVE PHOTOS BASED ON USERID', photos);
         dispatch(loadPhotos(photos))
     }
 }
 
 
 export const uploadSinglePhoto = (singlePhoto) => async dispatch => {
-    // const response = await csrfFetch(`/api/photos/new`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(singlePhoto)
-    // })
-    // if (response.ok) {
-    //     const photo = await response.json()
-    //     console.log('THis is uploadSinglePhoto', photo);
-    //     dispatch(addSinglePhoto(photo))
-    //     return photo
-    // }
     const { title, description, userId, imgUrl } = singlePhoto
-    // console.log('This is singlePhoto',singlePhoto);
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
@@ -116,7 +98,6 @@ export const updatePhoto = photo => async dispatch => {
     })
     if (response.ok) {
         const updatedPhoto = await response.json()
-        // console.log('%%%%%%%%%', updatedPhoto );
         dispatch(updateSinglePhoto(updatedPhoto))
     }
 }
