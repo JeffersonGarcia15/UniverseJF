@@ -89,6 +89,22 @@ router.put('/updateUser/:id', singleMulterUpload("image"), asyncHandler(async (r
   return res.json(update)
 }))
 
+router.put('/updateProfileImage/:id', singleMulterUpload("image"), asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  // const { firstName, lastName, username } = req.body
+  const user = await User.findByPk(id)
+  const profileImageUrl = await singlePublicFileUpload(req.file)
+  // const banner = await singlePublicFileUpload(req.file)
+  const update = await user.update({
+    // firstName,
+    // lastName,
+    // username,
+    profileImageUrl,
+    // banner
+  })
+  return res.json(update)
+}))
+
 // router.put('/updateBanner/:id', singleMulterUpload("image"), asyncHandler(async (req, res) => {
 //   const id = parseInt(req.params.id, 10)
 //   const user = await User.findByPk(id)
@@ -96,5 +112,20 @@ router.put('/updateUser/:id', singleMulterUpload("image"), asyncHandler(async (r
 //   const update = await user.update({ banner })
 //   return res.json(update)
 // }))
+router.put('/updateBanner/:id', singleMulterUpload("image"), asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  // const { firstName, lastName, username } = req.body
+  const user = await User.findByPk(id)
+  // const profileImageUrl = await singlePublicFileUpload(req.file)
+  const banner = await singlePublicFileUpload(req.file)
+  const update = await user.update({
+    // firstName,
+    // lastName,
+    // username,
+    // profileImageUrl,
+    banner
+  })
+  return res.json(update)
+}))
   
 module.exports = router;
