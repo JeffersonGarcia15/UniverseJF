@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
@@ -66,6 +66,35 @@ router.get(
     }
 );
 
+router.get('/:id', asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const user = await User.findByPk(id)
+
+  return res.json(user)
+}))
   
+router.put('/updateUser/:id', singleMulterUpload("image"), asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const {firstName, lastName, username } = req.body
+  const user = await User.findByPk(id)
+  // const profileImageUrl = await singlePublicFileUpload(req.file)
+  // const banner = await singlePublicFileUpload(req.file)
+  const update = await user.update({
+    firstName,
+    lastName,
+    username,
+    // profileImageUrl,
+    // banner
+  })
+  return res.json(update)
+}))
+
+// router.put('/updateBanner/:id', singleMulterUpload("image"), asyncHandler(async (req, res) => {
+//   const id = parseInt(req.params.id, 10)
+//   const user = await User.findByPk(id)
+//   const banner = await singlePublicFileUpload(req.file)
+//   const update = await user.update({ banner })
+//   return res.json(update)
+// }))
   
 module.exports = router;
