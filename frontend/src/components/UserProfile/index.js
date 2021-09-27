@@ -13,7 +13,6 @@ function UserProfile() {
     const photos = useSelector(state => state.photos)
    
     const photoInfo = Object.values(photos)
-
     useEffect(() => {
         dispatch(getUsersPhotos(userId))
     }, [dispatch, userId])
@@ -30,9 +29,12 @@ function UserProfile() {
         history.push(`/profile/${userId}/albums`);
     }
 
+    
+
     return (
         <React.Fragment>
             <ProfileNavBar></ProfileNavBar>
+            
             <div className='explore-container'>
                 <div className='photo-container'>
                     {Object.values(photos).map(photo => {

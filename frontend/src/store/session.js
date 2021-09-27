@@ -3,6 +3,8 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const UPDATE_USER = "session/UPDATE_USER"
+
 
 const setUser = (user) => {
     return {
@@ -17,33 +19,35 @@ const removeUser = () => {
     };
 };
 
-export const createUser = (user) => async (dispatch) => {
-    const { images, image, firstName, lastName, username, email, password, imgUrl } = user;
-    const formData = new FormData();
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append('image', image)
-    // formData.append('imgUrl', imgUrl)
-    formData.append("password", password);
+export const createUser = (firstName, lastName, username, email, password ) => async (dispatch) => {
+    // const { firstName, lastName, username, email, password } = user;
+    // const formData = new FormData();
+    // formData.append('firstName', firstName)
+    // formData.append('lastName', lastName)
+    // formData.append("username", username);
+    // formData.append("email", email);
+    // formData.append('image', image)
+    // // formData.append('imgUrl', imgUrl)
+    // formData.append("password", password);
 
-    // for multiple files
-    if (images && images.length !== 0) {
-        for (var i = 0; i < images.length; i++) {
-            formData.append("images", images[i]);
-        }
-    }
+    // // for multiple files
+    // if (images && images.length !== 0) {
+    //     for (var i = 0; i < images.length; i++) {
+    //         formData.append("images", images[i]);
+    //     }
+    // }
 
-    // for single file
-    if (imgUrl) formData.append("image", imgUrl);
+    // // for single file
+    // if (imgUrl) formData.append("image", imgUrl);
 
     const res = await csrfFetch(`/api/users/`, {
         method: "POST",
         headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify({
+            firstName, lastName, username, email, password
+        }),
     });
 
     const data = await res.json();
@@ -64,11 +68,81 @@ export const login = (user) => async (dispatch) => {
     dispatch(setUser(data.user));
     return response;
 };
+// updateProfileImage
+export const updateUserProfile = (firstName, lastName, username, user_id) => async dispatch => {
+    const formData = new FormData()
+
+    formData.append("firstName", firstName)
+    formData.append("lastName", lastName)
+    formData.append("username", username)
+    // formData.append("username", username)
+
+    // if (profileImageUrl) formData.append("image", profileImageUrl)
+    // if (banner) formData.append("image", banner)
+
+    const response = await csrfFetch(`/api/session/updateUser/${user_id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    })
+    const data = await response.json();
+    dispatch(setUser(data))
+
+}
+
+export const updateUserProfilePhoto = (profileImageUrl, user_id) => async dispatch => {
+    const formData = new FormData()
+
+    // formData.append("firstName", firstName)
+    // formData.append("lastName", lastName)
+    // formData.append("username", username)
+    // formData.append("username", username)
+
+    if (profileImageUrl) formData.append("image", profileImageUrl)
+    // if (banner) formData.append("image", banner)
+
+    const response = await csrfFetch(`/api/session/updateProfileImage/${user_id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    })
+    const data = await response.json();
+    dispatch(setUser(data))
+
+}
+
+export const updateUserBanner = (banner, user_id) => async dispatch => {
+    const formData = new FormData()
+
+    // formData.append("firstName", firstName)
+    // formData.append("lastName", lastName)
+    // formData.append("username", username)
+    // formData.append("username", username)
+
+    if (banner) formData.append("image", banner)
+    // if (banner) formData.append("image", banner)
+
+    const response = await csrfFetch(`/api/session/updateBanner/${user_id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    })
+    const data = await response.json();
+    dispatch(setUser(data))
+
+}
 
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
     let newState;
+    let updatedState = {...state}
     switch (action.type) {
         case SET_USER:
             return { ...state, user: action.payload };
@@ -76,6 +150,9 @@ const sessionReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.user = null;
             return newState;
+        case UPDATE_USER:
+            updatedState[action.user.id] = action.user
+            return updatedState;
         default:
             return state;
     }

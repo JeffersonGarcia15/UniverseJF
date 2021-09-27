@@ -108,6 +108,8 @@ function PhotoUploadModal() {
         //     if (res.data && res.data.errors) setErrors(res.data.errors);
         // });
         // history.push('/')
+        setTitle('')
+        setDescription('')
     };
     const updateFile = (e) => {
         const file = e.target.files[0];
