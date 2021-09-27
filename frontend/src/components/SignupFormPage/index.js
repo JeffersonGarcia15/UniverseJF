@@ -42,7 +42,7 @@ const CreateUser = () => {
         if (password === confirmPassword) {
             setErrors([])
             let newErrors = [];
-            dispatch(createUser({ firstName, lastName, username, email, password, image }))
+            dispatch(createUser(firstName, lastName, username, email, password ))
                 // .then(() => {
                 //     setUsername("");
                 //     setEmail("");
@@ -114,7 +114,7 @@ const CreateUser = () => {
                             <span>{IconPassConfirm}</span>
                         </div>
                     </div>
-                    <div className="inputfile-box">
+                    {/* <div className="inputfile-box">
                         <input type="file" id="file" className="inputfile"
                             accept="image/*"
                             onChange={updateFile} />
@@ -124,7 +124,7 @@ const CreateUser = () => {
                                 Select File
                                 </span>
                         </label>
-                    </div>
+                    </div> */}
                     <button type="submit" className="signup-btn" >Create User</button>
                 </div>
             </form>
