@@ -33,6 +33,13 @@ module.exports = {
       },
       profileImageUrl: {
         type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: 'https://universejf.s3.us-east-2.amazonaws.com/default-avatar.png'
+      },
+      banner: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: 'https://universejf.s3.us-east-2.amazonaws.com/20180121_Taipei%2C_Taiwan_Skyline_from_Xiangshan.jpg'
       },
       createdAt: {
         allowNull: false,

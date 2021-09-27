@@ -40,7 +40,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     profileImageUrl: {
       type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'https://universejf.s3.us-east-2.amazonaws.com/default-avatar.png'
     },
+    banner: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'https://universejf.s3.us-east-2.amazonaws.com/20180121_Taipei%2C_Taiwan_Skyline_from_Xiangshan.jpg'
+    }
   },
   {
     defaultScope: {
@@ -59,8 +66,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
-    const { id, firstName, lastName, username, email, profileImageUrl } = this; // context will be the User instance
-    return { id, firstName, lastName, username, email, profileImageUrl };
+    const { id, firstName, lastName, username, email, profileImageUrl, banner } = this; // context will be the User instance
+    return { id, firstName, lastName, username, email, profileImageUrl, banner };
   };
 
   User.prototype.validatePassword = function (password) {
