@@ -37,7 +37,7 @@ function PhotoUploadModal() {
 
     useEffect(() => {
         dispatch(getUserAlbums(sessionUser.id))
-    }, [dispatch, sessionUser.id])
+    }, [dispatch, sessionUser.id, photoId])
 
 
     useEffect(() => {
