@@ -5,6 +5,7 @@ import { createUser } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import usePaswordToggle from '../../context/UserForm/UsePasswordToggle'
+import ValidateEmail from '../utils'
 import './SignupForm.css'
 
 const CreateUser = () => {
@@ -19,6 +20,7 @@ const CreateUser = () => {
     const [PwInputType, IconPass] = showPassword();
     const [PwConfirmInputType, IconPassConfirm] = showConfirmPass();
     const [filename, setFilename] = useState("Upload a profile picture...");
+    // const [errors, setErrors] = useState([])
     const history = useHistory()
 
     const [firstName, setFirstName] = useState("");
@@ -39,26 +41,65 @@ const CreateUser = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (password === confirmPassword) {
-            setErrors([])
-            let newErrors = [];
-            dispatch(createUser(firstName, lastName, username, email, password ))
-                // .then(() => {
-                //     setUsername("");
-                //     setEmail("");
-                //     setPassword("");
-                //     setImage(null);
-                // })
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) {
-                        newErrors = data.errors;
-                        setErrors(newErrors);
-                    }
-                });
-            history.push('/explore')
+        setErrors([])
+        let validatorErrors = []
+
+        if (!ValidateEmail(email)) {
+            validatorErrors.push('Please provide a valid email address')
         }
-        return setErrors(['Password field and confirm password fields do not match'])
+
+        if (firstName.length < 3) {
+            validatorErrors.push('Please provide a valid first name with more than 3 characters')
+        }
+        else if (firstName.length > 50) {
+            validatorErrors.push('Please provide a valid first name with not more than 50 characters')
+        }
+
+        if (lastName.length < 3) {
+            validatorErrors.push('Please provide a valid last name with more than 3 characters')
+        }
+        else if (lastName.length > 50) {
+            validatorErrors.push('Please provide a valid last name with not more than 50 characters')
+        }
+
+        if (password.length < 6) {
+            validatorErrors.push('Please provide a password with 6 or more characters')
+        }
+
+        if (password.length > 15) {
+            validatorErrors.push('Please provide a password not longer than 15 characters')
+        }
+
+        if (username.length < 3) {
+            validatorErrors.push('Please provide a username with at least 3 characters')
+        }
+        else if (username.length > 15) {
+            validatorErrors.push('Please provide a username not longer than 15 characters')
+        }
+
+        if (password !== confirmPassword) {
+            validatorErrors.push('Password field and confirm password fields do not match')
+        }
+
+        if (!validatorErrors.length) {
+           
+            dispatch(createUser(firstName, lastName, username, email, password ))
+                .then(() => {
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                    setImage(null);
+                    history.push('/explore')
+                })
+                // .catch(async (res) => {
+                //     const data = await res.json();
+                //     if (data && data.errors) {
+                //         newErrors = data.errors;
+                //         setErrors(newErrors);
+                //     }
+                // });
+        }
+        return setErrors(validatorErrors)
     };
 
     const updateFile = (e) => {
