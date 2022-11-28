@@ -1,6 +1,9 @@
+// require('dotenv').config();
+
+console.log("WHAT IS THISISISISISISISIS", process.env.DB_USERNAME);
 module.exports = {
     environment: process.env.NODE_ENV || 'development',
-    port: process.env.PORT || 5000,
+    port: process.env.PORT || 4000,
     db: {
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
