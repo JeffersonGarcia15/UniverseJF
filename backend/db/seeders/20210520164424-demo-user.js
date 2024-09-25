@@ -21,7 +21,7 @@ module.exports = {
           lastName: "Portillo",
           username: "Yeilyn",
           profileImageUrl:
-            "https://universejf.s3.us-east-2.amazonaws.com/Amber.jpg",
+            "https://astrogram.s3.us-east-2.amazonaws.com/avatar.png",
           email: "Yeilyn@gmail.com",
           hashedPassword: bcrypt.hashSync("yoga"),
         },
