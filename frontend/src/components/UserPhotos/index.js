@@ -80,48 +80,59 @@ function UserPhoto() {
           className="heart-icon"
         ></FavoriteIcon>
       </div>
-      <div className="photo__component__background">
-        <div>
-          <div className="photo__component__information">
-            <div className="photo__component__photo__information">
-              <img
-                src={photo?.User.profileImageUrl}
-                alt={`${photo?.User.firstName}`}
-                className="photo__component__photo__owner__img"
-              />
-              <div className="photo__component__photo__owner__photo__title">
-                <a
-                  className="photo__component__photo__owner__name"
-                  href={`/profile/${photo?.User.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    history.push(`/profile/${photo?.User.id}`);
-                  }}
-                >
-                  {photo?.User.firstName}
-                </a>
-                <h3 className="photo__component__photo__title">
-                  {photo?.title}
-                </h3>
-                <p>{photo?.description}</p>
+      <div className="photo__component__info__comments__and__tags">
+        <div className="photo__component__background">
+          <div>
+            <div className="photo__component__information">
+              <div className="photo__component__photo__information">
+                <img
+                  src={photo?.User.profileImageUrl}
+                  alt={`${photo?.User.firstName}`}
+                  className="photo__component__photo__owner__img"
+                />
+                <div className="photo__component__photo__owner__photo__title">
+                  <a
+                    className="photo__component__photo__owner__name"
+                    href={`/profile/${photo?.User.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history.push(`/profile/${photo?.User.id}`);
+                    }}
+                  >
+                    {photo?.User.firstName}
+                  </a>
+                  <h3 className="photo__component__photo__title">
+                    {photo?.title}
+                  </h3>
+                  <p>{photo?.description}</p>
+                </div>
+              </div>
+              <div className="photo__component__likes__and__tags">
+                <p>{photoLength} Like(s)</p>
               </div>
             </div>
-            <div className="photo__component__likes__and__tags">
-              <p>{photoLength} Like(s)</p>
-            </div>
+          </div>
+          <div>
+            {/* <UpdateDelePhoto></UpdateDelePhoto> */}
+            <hr />
+          </div>
+          <div>
+            <Comments></Comments>
           </div>
         </div>
-        <div>
-          {/* <UpdateDelePhoto></UpdateDelePhoto> */}
-          <hr />
-        </div>
-        <div>
-          <Comments></Comments>
-        </div>
-        <div>
-          {tags?.map(function (tag, idx) {
-            return <div key={idx}>{tag?.name}</div>;
-          })}
+        <div className="photo__component__tags">
+          <div className="tags">
+            <p className="tags__title">Tags</p>
+            <div className="tags__container">
+              {tags?.map(function (tag, idx) {
+                return (
+                  <div className="photo__component__tag" key={idx}>
+                    {tag?.name}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

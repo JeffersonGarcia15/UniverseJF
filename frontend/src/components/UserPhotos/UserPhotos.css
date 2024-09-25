@@ -11,10 +11,12 @@
     height: 35%;
 }
 
-.photo__component__background {
+.photo__component__info__comments__and__tags {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
     background-color: #f3f5f6;
     padding: 25px 0 12px 25px;
-
 }
 
 .photo__component__information {
@@ -68,4 +70,37 @@
     background-color: transparent;
 }
 
-/* color: #006dac; */
+/* .tags {
+    display: flex;
+    justify-content: flex-start;
+} */
+
+.photo__component__tags {
+    /* width: 300px; */
+}
+
+.tags {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tags__title {
+    color: #006dac;
+}
+
+.tags__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.photo__component__tag {
+    background-color: #d3d3d3;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
