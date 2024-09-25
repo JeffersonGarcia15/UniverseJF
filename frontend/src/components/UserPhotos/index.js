@@ -7,6 +7,7 @@ import {
   getAllLikes,
   deleteSingleLike,
 } from "../../store/likes";
+import { updatePhoto } from "../../store/photos";
 import { getAllComments } from "../../store/comments";
 import Comments from "../Comments";
 import UpdateDelePhoto from "../UpdateDeletePhoto";
@@ -32,7 +33,8 @@ function UserPhoto() {
   const likesInPhoto = Object.values(likes)?.filter(
     (like) => like.photoId == photoId
   );
-  const [deleteSwitch, setDeleteSwitch] = useState(false);
+  const [photoTitle, setPhotoTitle] = useState();
+  const [photoDescription, setPhotoDescription] = useState();
   const [openUpdateDeleteModal, setOpenUpdateDeleteModal] = useState(false);
   const isPhotoLiked = likesInPhoto?.some((like) => like.userId === user.id);
 
@@ -78,6 +80,23 @@ function UserPhoto() {
     setOpenUpdateDeleteModal((prev) => !prev);
   }
 
+  async function updateUserPhoto(e) {
+    e.preventDefault();
+
+    dispatch(
+      updatePhoto({
+        title: photoTitle,
+        description: photoDescription,
+        photoId,
+      })
+    );
+
+    // Cleanup data
+    setPhotoTitle();
+    setPhotoDescription();
+    setOpenUpdateDeleteModal((prev) => !prev);
+  }
+
   return (
     <div className="photo__component">
       <div className="photo__component__img">
@@ -88,21 +107,26 @@ function UserPhoto() {
         ></MoreHorizIcon>
         {openUpdateDeleteModal && (
           <Modal onClose={openUpdateDeleteModalFunction}>
-            <div className="update__delete__container">
+            <form
+              onSubmit={updateUserPhoto}
+              className="update__delete__container"
+            >
               <h3 className="update__delete__title">Edit your photo</h3>
               <input
                 type="text"
                 className="update__delete__input"
-                value={photo.title}
+                value={photoTitle || photo.title}
+                onChange={(e) => setPhotoTitle(e.target.value)}
               />
               <input
                 type="text"
                 className="update__delete__input"
-                value={photo.description}
+                value={photoDescription || photo.description}
+                onChange={(e) => setPhotoDescription(e.target.value)}
               />
               <button className="update__button">Save updates</button>
               <button className="delete__button">Delete photo</button>
-            </div>
+            </form>
           </Modal>
         )}
         <FavoriteIcon
@@ -143,13 +167,19 @@ function UserPhoto() {
               <div className="photo__component__metadata">
                 <div className="photos__faves__count">
                   <p className="faves__count">{photoLength}</p>
-                  <p className="faves__text">faves</p>
+                  <p className="faves__text">
+                    {photoLength === 1 ? "fave" : "faves"}
+                  </p>
                 </div>
                 <div className="photos__comments__count">
                   <p className="comments__count">
                     {Object.values(comments).length}
                   </p>
-                  <p className="comments__text">comments</p>
+                  <p className="comments__text">
+                    {Object.values(comments).length === 1
+                      ? "comment"
+                      : "comments"}
+                  </p>
                 </div>
               </div>
             </div>
