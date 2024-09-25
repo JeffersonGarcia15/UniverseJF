@@ -11,7 +11,9 @@ import { getAllComments } from "../../store/comments";
 import Comments from "../Comments";
 import UpdateDelePhoto from "../UpdateDeletePhoto";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import "./UserPhotos.css";
+import { Modal } from "../../context/Modal";
 
 function UserPhoto() {
   const history = useHistory();
@@ -31,6 +33,7 @@ function UserPhoto() {
     (like) => like.photoId == photoId
   );
   const [deleteSwitch, setDeleteSwitch] = useState(false);
+  const [openUpdateDeleteModal, setOpenUpdateDeleteModal] = useState(false);
   const isPhotoLiked = likesInPhoto?.some((like) => like.userId === user.id);
 
   useEffect(() => {
@@ -71,10 +74,37 @@ function UserPhoto() {
     dispatch(getAllLikes);
   }, [dispatch, isPhotoLiked]);
 
+  function openUpdateDeleteModalFunction() {
+    setOpenUpdateDeleteModal((prev) => !prev);
+  }
+
   return (
     <div className="photo__component">
       <div className="photo__component__img">
         <img src={photo?.imgUrl} alt={photo?.title} className="single-photo" />
+        <MoreHorizIcon
+          className="horiz-icon"
+          onClick={openUpdateDeleteModalFunction}
+        ></MoreHorizIcon>
+        {openUpdateDeleteModal && (
+          <Modal onClose={openUpdateDeleteModalFunction}>
+            <div className="update__delete__container">
+              <h3 className="update__delete__title">Edit your photo</h3>
+              <input
+                type="text"
+                className="update__delete__input"
+                value={photo.title}
+              />
+              <input
+                type="text"
+                className="update__delete__input"
+                value={photo.description}
+              />
+              <button className="update__button">Save updates</button>
+              <button className="delete__button">Delete photo</button>
+            </div>
+          </Modal>
+        )}
         <FavoriteIcon
           onClick={isPhotoLiked ? dislike : addLike}
           style={{

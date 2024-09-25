@@ -66,6 +66,14 @@
     right: 10px;
 }
 
+.horiz-icon {
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    right: 10px;
+    top: 10px;
+}
+
 .icon:hover {
     background-color: transparent;
 }
@@ -107,4 +115,10 @@
 
 .faves__text, .comments__text {
     color: #302b2b5e;
+}
+
+.update__delete__container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
