@@ -21,10 +21,10 @@ export const addSingleAlbum = (album) => {
   };
 };
 
-export const addPhotoToAlbum = (album) => {
+export const addPhotoToAlbum = (photoAlbum) => {
   return {
     type: ADD_TO_ALBUM,
-    album,
+    photoAlbum,
   };
 };
 export const updateSingleAlbum = (album) => {
@@ -69,7 +69,12 @@ export const addUserPhotoToAlbum = (id, photoId) => async (dispatch) => {
   });
   if (response.ok) {
     const album = await response.json();
-    dispatch(addPhotoToAlbum(album));
+    dispatch(
+      addPhotoToAlbum({
+        photoId,
+        id,
+      })
+    );
   }
 };
 
@@ -137,7 +142,15 @@ export default function albumsReducer(state = initialState, action) {
       return updatedState;
     }
     case ADD_TO_ALBUM: {
-      updatedState[action.album.albumId] = action.album;
+      // photoAlbum
+      updatedState[action.photoAlbum.id] = {
+        ...updatedState[action.photoAlbum.id],
+        ...action.photoAlbum,
+        Photos: [
+          ...updatedState[action.photoAlbum.id]["Photos"],
+          { id: action.photoAlbum.photoId },
+        ],
+      };
       return updatedState;
     }
     case UPDATE_SINGLE_ALBUM: {

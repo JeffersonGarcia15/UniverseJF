@@ -159,30 +159,34 @@ function Albums() {
                       key={album.Photos[0]?.id}
                       className="single-photo-container"
                     >
-                      {/* <a href={`/albums/${album.id}`}> */}
-                      <div className="photo-collection">
-                        <img
-                          className="photo-info"
-                          src={album.Photos[0]?.imgUrl}
-                          alt={album.Photos[0]?.title}
-                        />
-                        <MoreHorizIcon
-                          className="albums__horiz--icon"
-                          onClick={() => toggleUpdateDeleteAlbum(album)}
-                        />
-                        <div className="photo-title">
-                          <p className="user-photo-title">{album.title}</p>
-                          <p className="user-photo-description">
-                            {album.description}
-                          </p>
-                          <p className="user-number-photos">
-                            {album.Photos.length === 1
-                              ? "1 photo"
-                              : `${album.Photos.length} photos`}
-                          </p>
+                      <a href={`/albums/${album.id}`}>
+                        <div className="photo-collection">
+                          <img
+                            className="photo-info"
+                            src={album.Photos[0]?.imgUrl}
+                            alt={album.Photos[0]?.title}
+                          />
+                          <MoreHorizIcon
+                            className="albums__horiz--icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              toggleUpdateDeleteAlbum(album);
+                            }}
+                          />
+                          <div className="photo-title">
+                            <p className="user-photo-title">{album.title}</p>
+                            <p className="user-photo-description">
+                              {album.description}
+                            </p>
+                            <p className="user-number-photos">
+                              {album.Photos.length === 1
+                                ? "1 photo"
+                                : `${album.Photos.length} photos`}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      {/* </a> */}
+                      </a>
                     </div>
                   )}
                   {showForm && (
