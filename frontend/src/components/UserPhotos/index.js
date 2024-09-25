@@ -120,10 +120,12 @@ function UserPhoto() {
     <div className="photo__component">
       <div className="photo__component__img">
         <img src={photo?.imgUrl} alt={photo?.title} className="single-photo" />
-        <MoreHorizIcon
-          className="horiz-icon"
-          onClick={openUpdateDeleteModalFunction}
-        ></MoreHorizIcon>
+        {user.id === photo?.userId && (
+          <MoreHorizIcon
+            className="horiz-icon"
+            onClick={openUpdateDeleteModalFunction}
+          ></MoreHorizIcon>
+        )}
         {openUpdateDeleteModal && (
           <Modal onClose={openUpdateDeleteModalFunction}>
             <div className="update__delete__container">
