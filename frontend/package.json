@@ -43,7 +43,7 @@
   },
   "proxy": "http://localhost:4000",
   "engines": {
-    "node": "16.x"
+    "node": "16.20.0"
   }
   
 }
