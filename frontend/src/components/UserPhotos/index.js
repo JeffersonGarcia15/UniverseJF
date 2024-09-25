@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { getSingleUserPhoto, getAllPhotos } from "../../store/photos";
+import {
+  getSingleUserPhoto,
+  getAllPhotos,
+  deleteSinglePhoto,
+} from "../../store/photos";
 import {
   addUserLikeToPhoto,
   getAllLikes,
@@ -57,6 +61,11 @@ function UserPhoto() {
     dispatch(getAllLikes);
   }, []);
 
+  useEffect(() => {
+    setPhotoTitle(photo.title);
+    setPhotoDescription(photo.description);
+  }, [photo]);
+
   const addLike = async (e) => {
     e.preventDefault();
     const addSingleLikeToPhoto = {
@@ -97,6 +106,15 @@ function UserPhoto() {
     setOpenUpdateDeleteModal((prev) => !prev);
   }
 
+  async function deletePhoto(e) {
+    e.preventDefault();
+    let alert = window.confirm("Are you sure you want to delete your photo?");
+    if (alert) {
+      dispatch(deleteSinglePhoto(photo.id));
+    }
+    history.push("/explore");
+  }
+
   return (
     <div className="photo__component">
       <div className="photo__component__img">
@@ -107,26 +125,27 @@ function UserPhoto() {
         ></MoreHorizIcon>
         {openUpdateDeleteModal && (
           <Modal onClose={openUpdateDeleteModalFunction}>
-            <form
-              onSubmit={updateUserPhoto}
-              className="update__delete__container"
-            >
+            <div className="update__delete__container">
               <h3 className="update__delete__title">Edit your photo</h3>
               <input
                 type="text"
                 className="update__delete__input"
-                value={photoTitle || photo.title}
+                value={photoTitle}
                 onChange={(e) => setPhotoTitle(e.target.value)}
               />
               <input
                 type="text"
                 className="update__delete__input"
-                value={photoDescription || photo.description}
+                value={photoDescription}
                 onChange={(e) => setPhotoDescription(e.target.value)}
               />
-              <button className="update__button">Save updates</button>
-              <button className="delete__button">Delete photo</button>
-            </form>
+              <button className="update__button" onClick={updateUserPhoto}>
+                Save updates
+              </button>
+              <button className="delete__button" onClick={deletePhoto}>
+                Delete photo
+              </button>
+            </div>
           </Modal>
         )}
         <FavoriteIcon
