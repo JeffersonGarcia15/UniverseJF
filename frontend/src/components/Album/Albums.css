@@ -1,18 +1,3 @@
-.explore-container {
-  display: flex;
-  justify-content: center;
-    background: #f1f1f1;
-}
-
-.photo-container {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-auto-rows: auto;
-  gap: 5px;
-  width: 80%;
-  margin-top: 30px;
-}
-
 .single-photo-container {
   height: 100%;
   overflow: hidden;
@@ -31,6 +16,8 @@
   width: 100%;
   height: 300px;
   object-fit: cover;
+
+  position: relative;
 }
 .photo-collection:hover{
    color: rgba(255, 255, 255, 0.7);
@@ -67,12 +54,16 @@
 
 }
 
-.inputalbum{
-  width: 29%;
-}
-
 .albums {
+  background: #f1f1f1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.albums__horiz--icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }

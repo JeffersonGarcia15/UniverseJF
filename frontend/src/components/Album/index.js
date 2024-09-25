@@ -8,7 +8,11 @@ import {
   deleteSingleAlbum,
 } from "../../store/albums";
 import ProfileNavBar from "../ProfileNavBar";
+
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+
 import "./Albums.css";
+import { Modal } from "../../context/Modal";
 // import '../UserProfile/UserProfile.css'
 
 function Albums() {
@@ -16,6 +20,7 @@ function Albums() {
   const { userId } = useParams();
   const user = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.albums);
+  const [selectedAlbum, setSelectedAlbum] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [newTitle, setNewTitle] = useState("");
@@ -42,9 +47,9 @@ function Albums() {
     setNewDescription("");
   };
 
-  const editAlbum = async (albumId, title, description, e) => {
+  const editAlbum = async (e) => {
     e.preventDefault();
-    await dispatch(updateAlbum(title, description, albumId));
+    await dispatch(updateAlbum(title, description, selectedAlbum.id));
     setTitle("");
     setDescription("");
     setShowForm(false);
@@ -53,21 +58,21 @@ function Albums() {
     //     description,
     //     // albumId
     // }))
-    history.push("/explore");
   };
 
-  const deleteAlbum = (userId) => {
+  const deleteAlbum = () => {
     let alert = window.confirm("Are you sure you want to delete your album?");
     if (alert) {
-      dispatch(deleteSingleAlbum(userId));
+      dispatch(deleteSingleAlbum(selectedAlbum.id));
     }
   };
 
-  const openForm = (album) => {
-    setShowForm(true);
+  const toggleUpdateDeleteAlbum = (album) => {
+    setShowForm((prev) => !prev);
     setTitle(album.title);
     setDescription(album.description);
     setFormId(album.id);
+    setSelectedAlbum(album);
   };
 
   return (
@@ -154,23 +159,67 @@ function Albums() {
                       key={album.Photos[0]?.id}
                       className="single-photo-container"
                     >
-                      <a href={`/albums/${album.id}`}>
-                        <div className="photo-collection">
-                          <img
-                            className="photo-info"
-                            src={album.Photos[0]?.imgUrl}
-                            alt={album.Photos[0]?.title}
-                          />
-                          <div className="photo-title">
-                            <p className="user-photo-title">{album.title}</p>
-                            <p className="user-number-photos">
-                              {album.Photos.length === 1
-                                ? "1 photo"
-                                : `${album.Photos.length} photos`}
-                            </p>
-                          </div>
+                      {/* <a href={`/albums/${album.id}`}> */}
+                      <div className="photo-collection">
+                        <img
+                          className="photo-info"
+                          src={album.Photos[0]?.imgUrl}
+                          alt={album.Photos[0]?.title}
+                        />
+                        <MoreHorizIcon
+                          className="albums__horiz--icon"
+                          onClick={() => toggleUpdateDeleteAlbum(album)}
+                        />
+                        <div className="photo-title">
+                          <p className="user-photo-title">{album.title}</p>
+                          <p className="user-photo-description">
+                            {album.description}
+                          </p>
+                          <p className="user-number-photos">
+                            {album.Photos.length === 1
+                              ? "1 photo"
+                              : `${album.Photos.length} photos`}
+                          </p>
                         </div>
-                      </a>
+                      </div>
+                      {/* </a> */}
+                    </div>
+                  )}
+                  {showForm && (
+                    <div>
+                      {selectedAlbum.id === album.id && (
+                        <Modal onClose={toggleUpdateDeleteAlbum}>
+                          <div className="update__delete__container">
+                            <h3 className="update__delete__title">
+                              Edit your album
+                            </h3>
+                            <input
+                              type="text"
+                              className="update__delete__input"
+                              value={title}
+                              onChange={(e) => setTitle(e.target.value)}
+                            />
+                            <input
+                              type="text"
+                              className="update__delete__input"
+                              value={description}
+                              onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <button
+                              className="update__button"
+                              onClick={editAlbum}
+                            >
+                              Save updates
+                            </button>
+                            <button
+                              className="delete__button"
+                              onClick={deleteAlbum}
+                            >
+                              Delete comment
+                            </button>
+                          </div>
+                        </Modal>
+                      )}
                     </div>
                   )}
                 </div>
