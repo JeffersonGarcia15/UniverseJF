@@ -1,54 +1,46 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router';
-import { getSingleUserAlbum } from '../../store/albums';
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router";
+import { getSingleUserAlbum } from "../../store/albums";
 
 function UserAlbums() {
-    const history = useHistory()
-    const dispatch = useDispatch()
-    const { albumId } = useParams()
-    const user = useSelector(state => state.session.user)
-    const album = useSelector(state => state.albums[albumId])
-    const photo = useSelector(state => state.photos)
-    // let riata = Object.values(albums).filter(p => p.id === albumId) 
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { albumId } = useParams();
+  const user = useSelector((state) => state.session.user);
+  const album = useSelector((state) => state.albums[albumId]);
+  const photo = useSelector((state) => state.photos);
+  // let riata = Object.values(albums).filter(p => p.id === albumId)
 
+  useEffect(() => {
+    dispatch(getSingleUserAlbum(albumId));
+  }, [dispatch, albumId]);
 
-    useEffect(() => {
-        dispatch(getSingleUserAlbum(albumId))
-    }, [dispatch, albumId])
-
-    return (
-        <div>
-
-            <div className='photo-container' >
-                {album?.id == albumId && album.Photos.map(photo => {
-                    return (
-                        <div key={photo.id} className='single-photo-container'>
-                            <a href={`/photos/${photo.id}`}>
-                                <div className='photo-collection'>
-                                    <img className='photo-info' src={photo.imgUrl} alt={photo.title} />
-                                    <div className='photo-title'>
-                                        <p className='user-photo-title'>{photo.title}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                    )
-                })}
-
-                    
-                {/* return ( */}
-
-                {/* ) */}
-    
-            </div>
-            {/* </div> */}
-
-        </div>
-    )
-
+  return (
+    <div>
+      <div className="explore__photo--grid">
+        {album?.id == albumId &&
+          album.Photos.map((photo) => {
+            return (
+              <div key={photo.id} className="single-photo-container">
+                <a href={`/photos/${photo.id}`}>
+                  <div className="photo-collection">
+                    <img
+                      className="photo-info"
+                      src={photo.imgUrl}
+                      alt={photo.title}
+                    />
+                    <div className="photo-title">
+                      <p className="user-photo-title">{photo.title}</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
 }
 // {
 //     user.id === album.userId && (
@@ -67,4 +59,4 @@ function UserAlbums() {
 //     )
 // }
 
-export default UserAlbums
+export default UserAlbums;

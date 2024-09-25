@@ -83,6 +83,7 @@ export const uploadSinglePhoto = (singlePhoto) => async (dispatch) => {
   });
   const photo = await response.json();
   dispatch(addSinglePhoto(photo));
+  return photo;
 };
 
 export const updatePhoto = (photo) => async (dispatch) => {
