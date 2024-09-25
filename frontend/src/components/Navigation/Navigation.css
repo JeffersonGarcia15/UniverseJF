@@ -109,6 +109,7 @@ a {
 .container-name {
     display: flex;
     justify-content: space-around;
+    position: relative;
 }
 
 .containers-botones {
