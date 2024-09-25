@@ -70,3 +70,9 @@
 .inputalbum{
   width: 29%;
 }
+
+.albums {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
