@@ -56,13 +56,16 @@ export const getUserAlbums = (userId) => async (dispatch) => {
   }
 };
 
-export const addUserPhotoToAlbum = (albumInfo) => async (dispatch) => {
-  const response = await csrfFetch(`/api/albums/${albumInfo.albumId}`, {
+export const addUserPhotoToAlbum = (id, photoId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/albums/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(albumInfo),
+    body: JSON.stringify({
+      photoId,
+      albumId: id,
+    }),
   });
   if (response.ok) {
     const album = await response.json();

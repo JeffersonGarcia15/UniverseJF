@@ -25,14 +25,6 @@ function PhotoUploadModal() {
   const albums = useSelector((state) => state.albums);
   const photo = useSelector((state) => state.photos);
   const tags = useSelector((state) => state.tags);
-  let idOfPhoto = Object.keys(photo)[Object.keys(photo).length - 1];
-  let intIdOfPhoto = parseInt(idOfPhoto, 10) + 1;
-  let idOfTag = Object.keys(tags)[Object.keys(tags).length - 1];
-  let intIdOfTag = parseInt(idOfTag, 10) + 1;
-  const tagList = photo[intIdOfPhoto - 1]?.Tags?.push(
-    Object.values(tags)[Object.values(tags).length - 1]
-  );
-  const tag = photo[intIdOfPhoto - 1]?.Tags;
 
   // const [errors, setErrors] = useState([])
   const sessionUser = useSelector((state) => state.session.user);
@@ -90,20 +82,17 @@ function PhotoUploadModal() {
     e.preventDefault();
 
     await dispatch(createTag({ name }));
-    await dispatch(
+    const photo = await dispatch(
       uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id })
     );
     setShowMenu(false);
     // e.preventDefault();
-    const addSinglePhotoToAlbum = {
-      photoId: intIdOfPhoto,
-      albumId: addPhotoAlbum,
-    };
+    console.log("WHAT IS THIS", addPhotoAlbum);
     // const addTagToPhoto = {
     //     photoId: intIdOfPhoto,
     //     tagId: intIdOfTag
     //     }
-    await dispatch(addUserPhotoToAlbum(addSinglePhotoToAlbum));
+    await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo.id));
     // await dispatch(addUserTagToPhoto(addTagToPhoto))
     // .catch(async (res) => {
     //     if (res.data && res.data.errors) setErrors(res.data.errors);
