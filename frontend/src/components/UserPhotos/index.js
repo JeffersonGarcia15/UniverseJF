@@ -14,7 +14,6 @@ import {
 import { updatePhoto } from "../../store/photos";
 import { getAllComments } from "../../store/comments";
 import Comments from "../Comments";
-import UpdateDelePhoto from "../UpdateDeletePhoto";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import "./UserPhotos.css";
@@ -62,8 +61,10 @@ function UserPhoto() {
   }, []);
 
   useEffect(() => {
-    setPhotoTitle(photo.title);
-    setPhotoDescription(photo.description);
+    if (photo) {
+      setPhotoTitle(photo.title);
+      setPhotoDescription(photo.description);
+    }
   }, [photo]);
 
   const addLike = async (e) => {

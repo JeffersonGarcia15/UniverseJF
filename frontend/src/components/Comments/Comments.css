@@ -18,6 +18,12 @@
     border: none;
 }
 
+.comments__comment__owner__and__update__delete {
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 1;
+}
+
 .comments__comment__owner {
     color: #006dac;
     font-weight: 700;
@@ -70,7 +76,12 @@
 }
 
 .comments__information__name__and__comment {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.comments__horiz--icon {
+    cursor: pointer;
 }
