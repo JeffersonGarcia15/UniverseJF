@@ -1,26 +1,124 @@
-.componente-foto {
+.photo__component__img {
     padding: 50px;
     background-color: #212124;
     display: flex;
     justify-content: center;
+
+    position: relative;
 }
 .single-photo {
     width: 35%;
     height: 35%;
 }
 
-.color-fondo {
+.photo__component__info__comments__and__tags {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
     background-color: #f3f5f6;
-    padding-left: 25px;
-
+    padding: 25px 0 12px 25px;
 }
 
-.photo-owner {
-    padding-left: 15px;
+.photo__component__information {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 24px 12px 0;
 }
 
-.h3-size {
-    font-size: 25px;
+.photo__component__metadata {
+    flex-basis: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
 }
 
-/* color: #006dac; */
+.photo__component__photo__information {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.photo__component__photo__owner__photo__title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    font-size: 14px;
+}
+
+.photo__component__photo__owner__name:link, .photo__component__photo__owner__name:visited {
+    color: inherit;
+    font-weight: 700;
+}
+
+.photo__component__photo__owner__img {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+}
+
+
+
+.heart-icon {
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.horiz-icon {
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    right: 10px;
+    top: 10px;
+}
+
+.icon:hover {
+    background-color: transparent;
+}
+
+/* .tags {
+    display: flex;
+    justify-content: flex-start;
+} */
+
+.photo__component__tags {
+    /* width: 300px; */
+}
+
+.tags {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tags__title {
+    color: #006dac;
+}
+
+.tags__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.photo__component__tag {
+    background-color: #d3d3d3;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.faves__text, .comments__text {
+    color: #302b2b5e;
+}
+
+.update__delete__container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
