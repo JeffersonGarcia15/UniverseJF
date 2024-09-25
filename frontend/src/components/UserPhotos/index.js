@@ -7,6 +7,7 @@ import {
   getAllLikes,
   deleteSingleLike,
 } from "../../store/likes";
+import { getAllComments } from "../../store/comments";
 import Comments from "../Comments";
 import UpdateDelePhoto from "../UpdateDeletePhoto";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -19,6 +20,7 @@ function UserPhoto() {
   const user = useSelector((state) => state.session.user);
   const photo = useSelector((state) => state.photos[photoId]);
   const likes = useSelector((state) => state.likes);
+  const comments = useSelector((state) => state.comments);
   const tags = photo?.Tags;
   const likeId = Object.values(likes).find(
     (like) => like.userId == user.id && like.photoId == photoId
@@ -33,7 +35,8 @@ function UserPhoto() {
 
   useEffect(() => {
     dispatch(getSingleUserPhoto(photoId));
-  }, [photoId]);
+    dispatch(getAllComments(photoId));
+  }, [dispatch, photoId]);
 
   // useEffect(() => {
   //     dispatch(getAllPhotos())
@@ -107,8 +110,17 @@ function UserPhoto() {
                   <p>{photo?.description}</p>
                 </div>
               </div>
-              <div className="photo__component__likes__and__tags">
-                <p>{photoLength} Like(s)</p>
+              <div className="photo__component__metadata">
+                <div className="photos__faves__count">
+                  <p className="faves__count">{photoLength}</p>
+                  <p className="faves__text">faves</p>
+                </div>
+                <div className="photos__comments__count">
+                  <p className="comments__count">
+                    {Object.values(comments).length}
+                  </p>
+                  <p className="comments__text">comments</p>
+                </div>
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@
     margin: 0 24px 12px 0;
 }
 
-.photo__component__likes__and__tags {
+.photo__component__metadata {
     flex-basis: 400px;
     display: flex;
     flex-wrap: wrap;
@@ -103,4 +103,8 @@
     border-radius: 5px;
 
     cursor: pointer;
+}
+
+.faves__text, .comments__text {
+    color: #302b2b5e;
 }
