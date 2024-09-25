@@ -18,7 +18,7 @@ function UserAlbums() {
 
   return (
     <div>
-      <div className="photo-container">
+      <div className="explore__photo--grid">
         {album?.id == albumId &&
           album.Photos.map((photo) => {
             return (
