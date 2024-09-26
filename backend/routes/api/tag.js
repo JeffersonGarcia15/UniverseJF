@@ -29,16 +29,30 @@ router.post(
   "/new",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { name } = req.body;
-    /**
-     - fetch all existing tags
-     - Check if that array has name on it and if it does return res.json(existingTag);
-     - else create
-     */
-    const newTag = await Tag.create({
-      name,
+    const { tagsArray } = req.body;
+
+    const existingTags = await Tag.findAll({
+      where: {
+        name: tagsArray,
+      },
     });
-    return res.json(newTag);
+
+    const existingTagNames = existingTags.map((tag) => tag.name);
+
+    const newTagNames = tagsArray.filter(
+      (tagName) => !existingTagNames.includes(tagName)
+    );
+
+    // If there are new tags to create, bulk create them
+    let newTags = [];
+    if (newTagNames.length > 0) {
+      newTags = await Tag.bulkCreate(newTagNames.map((name) => ({ name })));
+    }
+
+    // Combine the existing tags with the new tags to return them all
+    const allTags = [...existingTags, ...newTags];
+
+    return res.json(allTags);
   })
 );
 

@@ -41,13 +41,13 @@ export const getAllTags = (photoId) => async (dispatch) => {
   }
 };
 
-export const createTag = (name) => async (dispatch) => {
+export const createTag = (tagsArray) => async (dispatch) => {
   const response = await csrfFetch(`/api/tags/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(name),
+    body: JSON.stringify(tagsArray),
   });
   if (response.ok) {
     const tag = await response.json();

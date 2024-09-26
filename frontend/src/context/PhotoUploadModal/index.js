@@ -82,6 +82,7 @@ function PhotoUploadModal() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const photo = await dispatch(
       uploadSinglePhoto({
         title,
@@ -91,31 +92,23 @@ function PhotoUploadModal() {
       })
     );
 
-    const tagsResponse = await Promise.all(
-      tagsArray.map((name) => dispatch(createTag({ name })))
-    );
+    // Send the entire array of tags to the backend in a single request
+    const tagsResponse = await dispatch(createTag({ tagsArray }));
 
-    const tagToPhotosResponse = await Promise.all(
+    // Assign tags to the photo
+    await Promise.all(
       tagsResponse.map(({ id }) =>
         dispatch(addUserTagToPhoto({ tagId: id, photoId: photo.id }))
       )
     );
 
-    setShowMenu(false);
-    // e.preventDefault();
-    // const addTagToPhoto = {
-    //     photoId: intIdOfPhoto,
-    //     tagId: intIdOfTag
-    //     }
     await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo.id));
-    // await dispatch(addUserTagToPhoto(addTagToPhoto))
-    // .catch(async (res) => {
-    //     if (res.data && res.data.errors) setErrors(res.data.errors);
-    // });
-    // history.push('/')
+
+    setShowMenu(false);
     setTitle("");
     setDescription("");
   };
+
   const updateFile = (e) => {
     const file = e.target.files[0];
     if (file) setImgUrl(file);
