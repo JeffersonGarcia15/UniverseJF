@@ -16,6 +16,10 @@ function UserAlbums() {
     dispatch(getSingleUserAlbum(albumId));
   }, [dispatch, albumId]);
 
+  function pushToPhotoDetails(id) {
+    history.push(`/photos/${id}`);
+  }
+
   return (
     <div>
       <div className="explore__photo--grid">
@@ -23,7 +27,7 @@ function UserAlbums() {
           album.Photos.map((photo) => {
             return (
               <div key={photo.id} className="single-photo-container">
-                <a href={`/photos/${photo.id}`}>
+                <div onClick={() => pushToPhotoDetails(photo.id)}>
                   <div className="photo-collection">
                     <img
                       className="photo-info"
@@ -34,7 +38,7 @@ function UserAlbums() {
                       <p className="user-photo-title">{photo.title}</p>
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
             );
           })}

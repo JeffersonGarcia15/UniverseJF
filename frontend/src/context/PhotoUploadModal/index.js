@@ -22,6 +22,8 @@ function PhotoUploadModal() {
   const [addTag, setAddTag] = useState("");
   const [photoId, setPhotoId] = useState(null);
   const [name, setName] = useState("");
+  const [tagTitle, setTagTitle] = useState("");
+  const [tagsArray, setTagsArray] = useState([]);
   const albums = useSelector((state) => state.albums);
   const photo = useSelector((state) => state.photos);
   const tags = useSelector((state) => state.tags);
@@ -81,30 +83,56 @@ function PhotoUploadModal() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await dispatch(createTag({ name }));
     const photo = await dispatch(
-      uploadSinglePhoto({ title, description, imgUrl, userId: sessionUser.id })
+      uploadSinglePhoto({
+        title,
+        description,
+        imgUrl,
+        userId: sessionUser.id,
+      })
     );
+
+    // Send the entire array of tags to the backend in a single request
+    const tagsResponse = await dispatch(createTag({ tagsArray }));
+
+    // Assign tags to the photo
+    await Promise.all(
+      tagsResponse.map(({ id }) =>
+        dispatch(addUserTagToPhoto({ tagId: id, photoId: photo.id }))
+      )
+    );
+
+    await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo));
+
     setShowMenu(false);
-    // e.preventDefault();
-    console.log("WHAT IS THIS", addPhotoAlbum);
-    // const addTagToPhoto = {
-    //     photoId: intIdOfPhoto,
-    //     tagId: intIdOfTag
-    //     }
-    await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo.id));
-    // await dispatch(addUserTagToPhoto(addTagToPhoto))
-    // .catch(async (res) => {
-    //     if (res.data && res.data.errors) setErrors(res.data.errors);
-    // });
-    // history.push('/')
     setTitle("");
     setDescription("");
+    setTagsArray([]);
+    setTagTitle("");
   };
+
   const updateFile = (e) => {
     const file = e.target.files[0];
     if (file) setImgUrl(file);
   };
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && tagTitle.trim() !== "") {
+      e.preventDefault();
+      setTagsArray((prev) => {
+        return [...prev, tagTitle];
+      });
+      setTagTitle("");
+    }
+  }
+
+  function removeTag(e, name) {
+    e.preventDefault();
+    e.stopPropagation();
+    setTagsArray((prev) => {
+      return prev.filter((tag) => tag !== name);
+    });
+  }
 
   return (
     <div className="modal">
@@ -152,6 +180,25 @@ function PhotoUploadModal() {
                   );
                 })}
               </select>
+              <div className="PhotoUploadModal__tags__container">
+                {tagsArray.map((tag, idx) => (
+                  <div className="photo__component__tag" key={idx}>
+                    <span>{tag}</span>
+                    <button
+                      className="close"
+                      onClick={(e) => removeTag(e, tag)}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <input
+                type="text"
+                value={tagTitle}
+                onChange={(e) => setTagTitle(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
               {/* <textarea value={name} onChange={(e) => setName(e.target.value)}> */}
               {/* <li value={addTag} onChange={(e) => setAddTag(e.target.value)}></li> */}
               {/* <input type="text" value={tagList} onChange={(e) => setAddTagPhoto(e.target.value)}></input> */}
