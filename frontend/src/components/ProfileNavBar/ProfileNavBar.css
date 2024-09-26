@@ -23,11 +23,23 @@
   z-index: 1;
 }
 .user-info-container{
+  width: 100%;
   margin-left: 10%;
   margin-right: 30px;
   padding-bottom: 20px;
   z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
+
+.name__settings {
+  display: flex;
+  justify-content: space-between;
+  width: 86.5%;
+}
+
 .Profile-img{
   width: 150px;
   height: 150px;
