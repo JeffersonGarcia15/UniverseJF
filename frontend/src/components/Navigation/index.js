@@ -1,51 +1,59 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import ProfileButton from "./ProfileButton";
 // import LoginFormModal from '../LoginFormModal/LoginForm'
 // import PhotoUpload from '../PhotoUpload'
 // import UserForm from '../UserForm'
-import PhotoUploadModal from '../../context/PhotoUploadModal'
-import Demo from '../Demo'
+import PhotoUploadModal from "../../context/PhotoUploadModal";
+import Demo from "../Demo";
 
-import './Navigation.css';
+import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
+
+  function logo() {
+    history.push("/explore");
+  }
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
-        <div className='containers'>
-          <a href="/explore">
+        <div
+          className="containers"
+          onClick={logo}
+          style={{ cursor: "pointer" }}
+        >
+          <div href="/explore">
             <i className="fas fa-meteor"></i>
-          </a>
+          </div>
         </div>
-        <div className='container-name'>
-          <div className='profile-btn'>
+        <div className="container-name">
+          <div className="profile-btn">
             <ProfileButton user={sessionUser} />
-
           </div>
           <PhotoUploadModal></PhotoUploadModal>
-
         </div>
-
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <div className='containers-2'>
+        <div className="containers-2">
           <a href="/">
             <i className="fas fa-meteor"></i>
           </a>
         </div>
         {/* <UserForm/> */}
-        <div className='containers-botones'>
-          <NavLink to="/auth" className='sign-up'>Sign Up/Log in</NavLink>
+        <div className="containers-botones">
+          <NavLink to="/auth" className="sign-up">
+            Sign Up/Log in
+          </NavLink>
           <Demo></Demo>
-
         </div>
       </>
     );
@@ -53,12 +61,11 @@ function Navigation({ isLoaded }) {
 
   return (
     <>
-      <div className='isLoaded'>
+      <div className="isLoaded">
         {isLoaded && sessionLinks}
         {/* <Demo></Demo> */}
       </div>
     </>
-
   );
 }
 

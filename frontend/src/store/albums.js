@@ -121,7 +121,7 @@ export const getSingleUserAlbum = (albumId) => async (dispatch) => {
   const response = await csrfFetch(`/api/albums/${albumId}`);
   if (response.ok) {
     const album = await response.json();
-    dispatch(loadSingleAlbum(album));
+    dispatch(addSingleAlbum(album));
   }
 };
 

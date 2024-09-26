@@ -47,6 +47,10 @@ function Albums() {
     setNewDescription("");
   };
 
+  function pushToAlbumDetails(id) {
+    history.push(`/albums/${id}`);
+  }
+
   const editAlbum = async (e) => {
     e.preventDefault();
     await dispatch(updateAlbum(title, description, selectedAlbum.id));
@@ -159,7 +163,10 @@ function Albums() {
                       key={album.Photos[0]?.id}
                       className="single-photo-container"
                     >
-                      <a href={`/albums/${album.id}`}>
+                      <div
+                        onClick={() => pushToAlbumDetails(album.id)}
+                        style={{ cursor: "pointer" }}
+                      >
                         <div className="photo-collection">
                           <img
                             className="photo-info"
@@ -186,7 +193,7 @@ function Albums() {
                             </p>
                           </div>
                         </div>
-                      </a>
+                      </div>
                     </div>
                   )}
                   {showForm && (
