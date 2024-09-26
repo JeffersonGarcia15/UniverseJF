@@ -20,14 +20,25 @@
   height: 100%;
   background: #000;
   opacity: 40%;
-  z-index: 1;
 }
 .user-info-container{
+  width: 100%;
   margin-left: 10%;
   margin-right: 30px;
   padding-bottom: 20px;
   z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
+
+.name__settings {
+  display: flex;
+  justify-content: space-between;
+  width: 86.5%;
+}
+
 .Profile-img{
   width: 150px;
   height: 150px;
@@ -98,8 +109,7 @@ margin-left: 0;
 .form-EditProfile{
   border: 0.01em solid #aaa;
   border-radius: 0.1em;
-  padding: 3em;
-  margin: 2em;
+  padding: 20px;
 }
 .form-EditProfile label{
   display: block;
@@ -119,14 +129,43 @@ margin-left: 0;
   box-shadow: 0 0 0.1em 0.06em red;
 }
 
-.form-EditProfile button{
+.btn-form {
   border: none;
-  background: #0f0;
-  color: #f00;
+  background: #006dac;
+  color: white;
   padding: 1em;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .albums__add--icon {
   cursor: pointer;
+}
+
+.profile__update__picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile__update__name {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn--profile__name {
+  width: 100%;
+}
+
+.profile__image__input {
+  display: block;
+  margin: auto;
+}
+
+input::file-selector-button {
+  background-color: #006dac;
+  border: none;
+  color: white;
+  padding: 5px;
 }
