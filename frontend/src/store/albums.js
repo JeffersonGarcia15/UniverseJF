@@ -56,14 +56,14 @@ export const getUserAlbums = (userId) => async (dispatch) => {
   }
 };
 
-export const addUserPhotoToAlbum = (id, photoId) => async (dispatch) => {
+export const addUserPhotoToAlbum = (id, photo) => async (dispatch) => {
   const response = await csrfFetch(`/api/albums/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      photoId,
+      photoId: photo.id,
       albumId: id,
     }),
   });
@@ -71,8 +71,8 @@ export const addUserPhotoToAlbum = (id, photoId) => async (dispatch) => {
     const album = await response.json();
     dispatch(
       addPhotoToAlbum({
-        photoId,
         id,
+        photo,
       })
     );
   }
@@ -145,10 +145,9 @@ export default function albumsReducer(state = initialState, action) {
       // photoAlbum
       updatedState[action.photoAlbum.id] = {
         ...updatedState[action.photoAlbum.id],
-        ...action.photoAlbum,
         Photos: [
           ...updatedState[action.photoAlbum.id]["Photos"],
-          { id: action.photoAlbum.photoId },
+          action.photoAlbum.photo,
         ],
       };
       return updatedState;

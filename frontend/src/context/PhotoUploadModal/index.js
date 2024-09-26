@@ -102,11 +102,13 @@ function PhotoUploadModal() {
       )
     );
 
-    await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo.id));
+    await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo));
 
     setShowMenu(false);
     setTitle("");
     setDescription("");
+    setTagsArray([]);
+    setTagTitle("");
   };
 
   const updateFile = (e) => {
