@@ -36,8 +36,7 @@ function UserProfile() {
           {Object.values(photos).map((photo) => {
             return (
               <div key={photo.id} className="single-photo-container">
-                <a
-                  href={`/photos/${photo.id}`}
+                <div
                   onClick={(e) => {
                     e.preventDefault();
                     history.push(`/photos/${photo.id}`);
@@ -54,7 +53,7 @@ function UserProfile() {
                       <p className="photo-user">by {photo.User?.username}</p>
                     </div>
                   </div>
-                </a>
+                </div>
                 {/* <a href={`/profile/${photo?.User.id}`}>
                                 <div>
                                     <p id='photo-user'>by {photo.User?.username}</p>

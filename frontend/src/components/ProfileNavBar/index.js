@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addSingleUserAlbum } from "../../store/albums";
+import { updateUserProfilePhoto, updateUserBanner } from "../../store/session";
 import EditProfileModal from "./EditProfileModal";
 import EditProfilePictureModal from "./EditProfilePictureModal";
 import EditBannerModal from "./EditBannerModal";
@@ -15,10 +16,15 @@ function ProfileNavBar() {
   const { userId } = useParams();
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [toggleCreateAlbum, setToggleCreateAlbum] = useState(false);
-  const user = useSelector((state) => state.session.user);
+  const [toggleUpdateProfilePicture, setToggleUpdateProfilePicture] =
+    useState(false);
+  const [toggleUpdateBanner, setToggleUpdateBanner] = useState(false);
+  const [banner, setBanner] = useState();
+  const [profileImageUrl, setProfileImageUrl] = useState();
   const photos = useSelector((state) => state.photos);
   const history = useHistory();
   const photoInfo = Object.values(photos);
@@ -50,20 +56,119 @@ function ProfileNavBar() {
     setToggleCreateAlbum((prev) => !prev);
   }
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await dispatch(updateUserProfilePhoto(profileImageUrl, user.id));
+    setProfileImageUrl();
+    setToggleUpdateProfilePicture((prev) => !prev);
+  };
+
+  const onSubmitBanner = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(updateUserBanner(banner, user.id));
+    // if (data?.errors) {
+    //   setErrors(data?.errors);
+    // }
+    setToggleUpdateBanner((prev) => !prev);
+  };
+
+  const updateProfileImageUrl = (e) => {
+    const file = e.target.files[0];
+    if (file) setProfileImageUrl(file);
+  };
+
+  const updateBanner = (e) => {
+    const file = e.target.files[0];
+    if (file) setBanner(file);
+  };
+
+  function toggleUpdateProfilePictureFunction(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setToggleUpdateProfilePicture((prev) => !prev);
+  }
+
+  function toggleUpdateBannerFunction(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setToggleUpdateBanner((prev) => !prev);
+  }
+
   return (
     <div>
       <div
         className="profile-container"
         style={{ backgroundImage: `url(${user.banner})` }}
+        onClick={toggleUpdateBannerFunction}
       >
+        {toggleUpdateBanner && (
+          <Modal onClose={toggleUpdateBannerFunction}>
+            <div
+              className="form-UpdateProfile"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <form onSubmit={onSubmitBanner}>
+                <h2>Update Banner</h2>
+                <div className="upload-file">
+                  <label>Change Your Banner</label>
+                  <input
+                    type="file"
+                    accept="image/png, image/gif, image/jpeg"
+                    onChange={updateBanner}
+                  />
+                </div>
+                <div>
+                  <button type="submit" className="btn-form" disabled={!banner}>
+                    Update banner
+                  </button>
+                </div>
+              </form>
+            </div>
+          </Modal>
+        )}
         <div className="user-info-container">
           <img
+            onClick={toggleUpdateProfilePictureFunction}
             src={user.profileImageUrl}
             alt="profile"
             className="Profile-img"
           />
-          <EditProfilePictureModal />
         </div>
+
+        {toggleUpdateProfilePicture && (
+          <Modal onClose={toggleUpdateProfilePictureFunction}>
+            <div
+              className="form-UpdateProfile"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <form onSubmit={onSubmit}>
+                {/* <ul className="form-errors">
+                {errors?.map((error, ind) => (
+                  <li key={ind}>{error}</li>
+                ))}
+              </ul> */}
+                <h2>Update profile picture</h2>
+                <div className="upload-file">
+                  <label>Change Your Profile Picture</label>
+                  <input
+                    type="file"
+                    accept="image/png, image/gif, image/jpeg"
+                    onChange={updateProfileImageUrl}
+                  />
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="btn-form"
+                    disabled={!profileImageUrl}
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </Modal>
+        )}
 
         <div className="user-info-profile">
           <h2 className="full-name">
@@ -71,14 +176,7 @@ function ProfileNavBar() {
           </h2>
           <div className="extra-info">
             <p className="user-name">{user.username}</p>
-            <a className="followers" href="">
-              followers(coming soon...)
-            </a>
-            <a className="following" href="">
-              following(coming soon...)
-            </a>
             <p className="count-photo-user">{photoInfo.length} photo(s)</p>
-            <EditBannerModal />
           </div>
         </div>
       </div>
@@ -117,9 +215,6 @@ function ProfileNavBar() {
             </div>
           </Modal>
         )}
-      </div>
-      <div>
-        <EditProfileModal></EditProfileModal>
       </div>
     </div>
   );
