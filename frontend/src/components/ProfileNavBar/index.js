@@ -146,16 +146,19 @@ function ProfileNavBar() {
               className="form-UpdateProfile"
               onClick={(e) => e.stopPropagation()}
             >
-              <form onSubmit={onSubmitBanner}>
+              <form
+                onSubmit={onSubmitBanner}
+                className="profile__update__picture"
+              >
                 <h2>Update Banner</h2>
-                <div className="upload-file">
-                  <label>Change Your Banner</label>
-                  <input
-                    type="file"
-                    accept="image/png, image/gif, image/jpeg"
-                    onChange={updateBanner}
-                  />
-                </div>
+                {/* <div className="upload-file"> */}
+                <input
+                  type="file"
+                  accept="image/png, image/gif, image/jpeg"
+                  onChange={updateBanner}
+                  className="profile__image__input"
+                />
+                {/* </div> */}
                 <div>
                   <button type="submit" className="btn-form" disabled={!banner}>
                     Update banner
@@ -188,10 +191,7 @@ function ProfileNavBar() {
 
         {toggleUpdateProfile && (
           <Modal onClose={toggleUpdateProfileFunction}>
-            <div
-              className="form-UpdateProfile"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div onClick={(e) => e.stopPropagation()}>
               <form
                 onSubmit={onSubmitProfileUpdate}
                 className="form-EditProfile"
@@ -233,7 +233,7 @@ function ProfileNavBar() {
                   placeholder="username"
                 ></input>
                 <div>
-                  <button type="submit" className="btn-form">
+                  <button type="submit" className="btn-form btn--profile__name">
                     Update
                   </button>
                 </div>
@@ -245,10 +245,10 @@ function ProfileNavBar() {
         {toggleUpdateProfilePicture && (
           <Modal onClose={toggleUpdateProfilePictureFunction}>
             <div
-              className="form-UpdateProfile"
+              className="profile__update"
               onClick={(e) => e.stopPropagation()}
             >
-              <form onSubmit={onSubmit}>
+              <form onSubmit={onSubmit} className="profile__update__picture">
                 {/* <ul className="form-errors">
                 {errors?.map((error, ind) => (
                   <li key={ind}>{error}</li>
@@ -256,7 +256,6 @@ function ProfileNavBar() {
               </ul> */}
                 <h2>Update profile picture</h2>
                 <div className="upload-file">
-                  <label>Change Your Profile Picture</label>
                   <input
                     type="file"
                     accept="image/png, image/gif, image/jpeg"
@@ -306,7 +305,7 @@ function ProfileNavBar() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              <button className="update__button" onClick={createAlbum}>
+              <button className="btn-form" onClick={createAlbum}>
                 Create
               </button>
             </div>
