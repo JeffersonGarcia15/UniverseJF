@@ -61,7 +61,7 @@ a {
   width: 105px;
   padding: 12px 0;
   right: 1%;
-  z-index: 100;
+  z-index: 1000;
   /* margin-left: 60px; 
   margin-bottom: 240px */
 }
