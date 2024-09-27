@@ -45,10 +45,16 @@ import { Modal } from "../../context/Modal";
 function Footer() {
   const history = useHistory();
   const [showHowItWorks, setShowHowItWorks] = useState(false);
+  const [showAboutTheProject, setShowAboutTheProject] = useState(false);
 
   function toggleShowHowItWorks() {
     setShowHowItWorks((prev) => !prev);
   }
+
+  function toggleShowAboutTheProject() {
+    setShowAboutTheProject((prev) => !prev);
+  }
+
   return (
     <footer className="footer">
       {showHowItWorks && (
@@ -97,12 +103,34 @@ function Footer() {
           <li className="footer__li" onClick={() => history.push("/about-us")}>
             Meet the team
           </li>
-          <li className="footer__li">About the Project</li>
-          <li className="footer__li">Tech Stack</li>
-          <li className="footer__li">Contributors</li>
-          <li className="footer__li">GitHub Repo</li>
+          <li className="footer__li" onClick={toggleShowAboutTheProject}>
+            About the Project
+          </li>
+          <li className="footer__li">
+            <a
+              className="footer__about__us__a"
+              href="https://github.com/JeffersonGarcia15/UniverseJF"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub Repo
+            </a>
+          </li>
         </ul>
       </nav>
+      {showAboutTheProject && (
+        <Modal onClose={toggleShowAboutTheProject}>
+          <div className="about__the__project">
+            <h1>
+              {" "}
+              This Flickr clone is a side project designed to practice front-end
+              and back-end development and it is part of the Week16 requirements
+              at App Academy. It showcases image uploads, user galleries, tags,
+              comments and more.
+            </h1>
+          </div>
+        </Modal>
+      )}
       <nav
         className="footer__help footer__section
       "

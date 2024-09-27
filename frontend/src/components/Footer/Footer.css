@@ -33,7 +33,7 @@
   color: rgb(119, 129, 139);
 }
 
-.footer__explore .footer__ul {
+.footer__explore, .footer__legal, .footer__extras {
   cursor: not-allowed;
 }
 
@@ -46,6 +46,14 @@
   text-decoration: underline !important;
 }
 
-.footer__social__media__a:link, .footer__social__media__a:visited {
+.footer__social__media__a:link, .footer__social__media__a:visited, .footer__about__us__a:link, .footer__about__us__a:visited {
   color: white;
+}
+
+.about__the__project {
+  text-align: center;
+}
+
+.footer__about__us {
+  cursor: pointer;
 }
