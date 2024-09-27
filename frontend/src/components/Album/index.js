@@ -7,6 +7,7 @@ import {
   updateAlbum,
   deleteSingleAlbum,
 } from "../../store/albums";
+import { getUsersPhotos } from "../../store/photos";
 import ProfileNavBar from "../ProfileNavBar";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -20,6 +21,7 @@ function Albums() {
   const { userId } = useParams();
   const user = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.albums);
+  const photo = useSelector((state) => state.photos);
   const [selectedAlbum, setSelectedAlbum] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -33,6 +35,10 @@ function Albums() {
 
   useEffect(() => {
     dispatch(getUserAlbums(userId));
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    dispatch(getUsersPhotos(userId));
   }, [dispatch, userId]);
 
   const createAlbum = async (e) => {
@@ -226,7 +232,7 @@ function Albums() {
                               className="delete__button"
                               onClick={deleteAlbum}
                             >
-                              Delete comment
+                              Delete album
                             </button>
                           </div>
                         </Modal>

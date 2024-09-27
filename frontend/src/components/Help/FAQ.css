@@ -1,6 +1,6 @@
 .FAQ__container {
     --main-color: hsl(275, 100%, 97%);
-    --secondary-color: hsl(75, 94%, 57%);
+    --secondary-color: #517ec2;
     --dark-color: hsl(292, 42%, 14%);
     
     font-family: "Work Sans";
@@ -65,6 +65,7 @@ hr {
 
 .description {
     color: var(--secondary-color);
+    font-weight: 700;
     font-size: 16px;
 
 }

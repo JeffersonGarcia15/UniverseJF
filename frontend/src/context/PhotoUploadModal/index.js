@@ -135,7 +135,7 @@ function PhotoUploadModal() {
   }
 
   return (
-    <div className="modal">
+    <div className="PhotoUploadModal">
       <button onClick={openMenu} className="icon">
         <i className="fas fa-camera-retro"></i>
       </button>
@@ -146,21 +146,21 @@ function PhotoUploadModal() {
               <h4 className="upload">Upload Your Photo</h4>
               <input
                 placeholder="Title"
-                className="title"
+                className="PhotoUploadModal__title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
               <input
                 placeholder="Description"
-                className="description"
+                className="PhotoUploadModal__description"
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
 
               <input
-                className="photo-upload"
+                className="PhotoUploadModal__photo-upload"
                 type="file"
                 accept="image/png, image/gif, image/jpeg"
                 onChange={updateFile}
@@ -205,7 +205,7 @@ function PhotoUploadModal() {
               {/* </textarea>  */}
               {/* <button type='button' formAction={addPhotoToAlbum}>Add</button> */}
               {/* </form> */}
-              <button className="btn" type="submit">
+              <button className="PhotoUploadModal__btn" type="submit">
                 Submit
               </button>
             </form>

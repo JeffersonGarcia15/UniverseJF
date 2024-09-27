@@ -10,7 +10,6 @@ function UserAlbums() {
   const user = useSelector((state) => state.session.user);
   const album = useSelector((state) => state.albums[albumId]);
   const photo = useSelector((state) => state.photos);
-  // let riata = Object.values(albums).filter(p => p.id === albumId)
 
   useEffect(() => {
     dispatch(getSingleUserAlbum(albumId));
