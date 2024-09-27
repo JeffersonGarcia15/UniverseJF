@@ -1,19 +1,51 @@
-.footer-container {
-  /* position: fixed; */
+.footer {
+  margin-top: auto;
+  box-sizing: border-box;
   background-color: #18181b;
   width: 100%;
-  /* bottom: 0; */
-  text-align: center;
-  margin-top: 0px;
-}
-
-.fa-github {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   color: white;
-  font-size: 25px;
-  margin: 10px 15px 0 15px;
+  padding: 64px;
 }
 
-.fa-github:hover {
-  color: #c7c3c3;
+.footer__section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
+.footer__ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 0 !important;
+
+}
+
+.footer__logo .fa-meteor {
+  padding: 0;
+}
+
+.footer__section__title {
+  color: rgb(119, 129, 139);
+}
+
+.footer__explore .footer__ul {
+  cursor: not-allowed;
+}
+
+.footer__help .footer__ul .footer__li, .footer__logo {
+  cursor: pointer;
+}
+
+.footer__how__it__works__a:link, .footer__how__it__works__a:visited {
+  color: #3e70bb;
+  text-decoration: underline !important;
+}
+
+.footer__social__media__a:link, .footer__social__media__a:visited {
+  color: white;
+}

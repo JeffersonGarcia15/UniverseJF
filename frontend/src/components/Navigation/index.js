@@ -28,7 +28,7 @@ function Navigation({ isLoaded }) {
           onClick={logo}
           style={{ cursor: "pointer" }}
         >
-          <div href="/explore">
+          <div>
             <i className="fas fa-meteor"></i>
           </div>
         </div>
