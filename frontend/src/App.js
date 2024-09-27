@@ -16,6 +16,7 @@ import NotFound from "./components/NotFound";
 import UserForm from "./components/UserForm";
 import UserAlbums from "./components/UserAlbums";
 import FAQ from "./components/Help/FAQ";
+import { AboutUs } from "./components/AboutUs/AboutUs";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route exact path="/faq">
             <FAQ />
+          </Route>
+          <Route exact path="/about-us">
+            <AboutUs />
           </Route>
           <Route>
             <NotFound></NotFound>

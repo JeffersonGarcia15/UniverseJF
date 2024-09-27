@@ -94,7 +94,7 @@ function Footer() {
       >
         <p className="footer__section__title">About Us</p>
         <ul className="footer__ul">
-          <li className="footer__li" onClick={() => history.push("/about-me")}>
+          <li className="footer__li" onClick={() => history.push("/about-us")}>
             Meet the team
           </li>
           <li className="footer__li">About the Project</li>
