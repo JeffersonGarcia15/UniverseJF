@@ -1,21 +1,21 @@
 .FAQ__container {
     --main-color: hsl(275, 100%, 97%);
-    --secondary-color: hsl(292, 16%, 49%);
+    --secondary-color: hsl(75, 94%, 57%);
     --dark-color: hsl(292, 42%, 14%);
     
     font-family: "Work Sans";
-    color: var(--dark-color);
+    color: white;
     height: 100vh;
     position: relative;
 
 }
 
-.icon:hover {
+.FAQ__icons:hover {
     cursor: pointer;
 }
 
 .FAQ__modal {
-    background-color: white;
+    background-color: hsl(0, 0%, 12%);
     width: 600px;
 
     position: absolute;
