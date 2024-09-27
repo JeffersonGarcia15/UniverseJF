@@ -4,23 +4,23 @@
     padding: 15px;
 }
 
-.upload {
+.PhotoUploadModal__upload {
     text-align: center;
 }
 
-.title {
+.PhotoUploadModal__title {
     margin-bottom: 10px;
     padding: 5px
 }
-.description {
+.PhotoUploadModal__description {
     margin-bottom: 10px;
     padding: 5px
 }
-.photo-upload {
+.PhotoUploadModal__photo-upload {
     margin-bottom: 10px;
     padding: 5px
 }
-.btn {
+.PhotoUploadModal__btn {
     margin-bottom: 10px;
     padding: 5px
 }

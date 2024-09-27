@@ -143,6 +143,12 @@ export default function albumsReducer(state = initialState, action) {
     }
     case ADD_TO_ALBUM: {
       // photoAlbum
+
+      // First check if there is a property called Photos
+      if (!updatedState[action.photoAlbum.id].hasOwnProperty("Photos")) {
+        updatedState[action.photoAlbum.id]["Photos"] = [];
+      }
+
       updatedState[action.photoAlbum.id] = {
         ...updatedState[action.photoAlbum.id],
         Photos: [

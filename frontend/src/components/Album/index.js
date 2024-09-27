@@ -226,7 +226,7 @@ function Albums() {
                               className="delete__button"
                               onClick={deleteAlbum}
                             >
-                              Delete comment
+                              Delete album
                             </button>
                           </div>
                         </Modal>
