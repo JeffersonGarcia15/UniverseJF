@@ -1,4 +1,5 @@
 .footer {
+  margin-top: auto;
   box-sizing: border-box;
   background-color: #18181b;
   width: 100%;
@@ -34,4 +35,17 @@
 
 .footer__explore .footer__ul {
   cursor: not-allowed;
+}
+
+.footer__help .footer__ul .footer__li, .footer__logo {
+  cursor: pointer;
+}
+
+.footer__how__it__works__a:link, .footer__how__it__works__a:visited {
+  color: #3e70bb;
+  text-decoration: underline !important;
+}
+
+.footer__social__media__a:link, .footer__social__media__a:visited {
+  color: white;
 }

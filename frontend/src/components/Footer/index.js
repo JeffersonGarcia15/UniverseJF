@@ -1,5 +1,7 @@
 import { useHistory } from "react-router-dom";
 import "./Footer.css";
+import { useState } from "react";
+import { Modal } from "../../context/Modal";
 
 /*
     Footer ->
@@ -42,10 +44,34 @@ import "./Footer.css";
 
 function Footer() {
   const history = useHistory();
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
+
+  function toggleShowHowItWorks() {
+    setShowHowItWorks((prev) => !prev);
+  }
   return (
     <footer className="footer">
+      {showHowItWorks && (
+        <Modal onClose={toggleShowHowItWorks}>
+          <h1>
+            Please visit the{" "}
+            <a
+              href="https://github.com/JeffersonGarcia15/UniverseJF"
+              target="_blank"
+              className="footer__how__it__works__a"
+              rel="noreferrer"
+            >
+              repo
+            </a>{" "}
+            to see some of the app's demos{" "}
+          </h1>
+        </Modal>
+      )}
       <nav className="footer__logo">
-        <i className="fas fa-meteor"></i>
+        <i
+          className="fas fa-meteor"
+          onClick={() => history.push("/explore")}
+        ></i>
       </nav>
       <nav
         className="footer__explore footer__section
@@ -68,6 +94,9 @@ function Footer() {
       >
         <p className="footer__section__title">About Us</p>
         <ul className="footer__ul">
+          <li className="footer__li" onClick={() => history.push("/about-me")}>
+            Meet the team
+          </li>
           <li className="footer__li">About the Project</li>
           <li className="footer__li">Tech Stack</li>
           <li className="footer__li">Contributors</li>
@@ -80,7 +109,9 @@ function Footer() {
       >
         <p className="footer__section__title">Help</p>
         <ul className="footer__ul">
-          <li className="footer__li">How It Works</li>
+          <li className="footer__li" onClick={toggleShowHowItWorks}>
+            How It Works
+          </li>
           <li className="footer__li" onClick={() => history.push("/faq")}>
             FAQ
           </li>
@@ -92,10 +123,46 @@ function Footer() {
       >
         <p className="footer__section__title">Social Media</p>
         <ul className="footer__ul">
-          <li className="footer__li">LinkedIn</li>
-          <li className="footer__li">GitHub</li>
-          <li className="footer__li">Portfolio</li>
-          <li className="footer__li">Wellfound</li>
+          <li className="footer__li">
+            <a
+              href="https://www.linkedin.com/in/jefferson-jurado-garcia/"
+              target="_blank"
+              rel="noreferrer"
+              className="footer__social__media__a"
+            >
+              LinkedIn
+            </a>
+          </li>
+          <li className="footer__li">
+            <a
+              href="https://github.com/JeffersonGarcia15"
+              target="_blank"
+              rel="noreferrer"
+              className="footer__social__media__a"
+            >
+              GitHub
+            </a>
+          </li>
+          <li className="footer__li">
+            <a
+              href="https://jefferson-portfolio.onrender.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="footer__social__media__a"
+            >
+              Portfolio
+            </a>
+          </li>
+          <li className="footer__li">
+            <a
+              href="https://wellfound.com/u/jefferson-a-lopez-garcia"
+              target="_blank"
+              rel="noreferrer"
+              className="footer__social__media__a"
+            >
+              Wellfound
+            </a>
+          </li>
         </ul>
       </nav>
       <nav
@@ -122,7 +189,4 @@ function Footer() {
   );
 }
 
-{
-  /* <i className="fab fa-github"></i> */
-}
 export default Footer;
