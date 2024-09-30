@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 // import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -21,6 +21,7 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const user = useSelector((state) => state.session.user);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -30,6 +31,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          {console.log("WHAT IS GOING ON?", user)}
           <Route exact path="/">
             <SplashPage></SplashPage>
           </Route>
@@ -62,7 +64,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      <Footer></Footer>
+      {user && <Footer></Footer>}
     </>
   );
 }
