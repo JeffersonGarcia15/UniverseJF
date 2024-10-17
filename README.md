@@ -1,11 +1,13 @@
 # Welcome to UniverseJF
 
-## Live link: [UniverseJF]( https://universejf.herokuapp.com/)
+## Live link: [UniverseJF](https://universejf.herokuapp.com/)
 
 [UniverseJF](https://universejf.herokuapp.com/), inspired by [flicker](https://www.flickr.com/), is a web application that allows users to post pictures of their favorite planets, galaxy or anything universe/space related. As a registered user you can post photos with tags, create albums, follow users, like photos and add comments on photos. And even if you have not registered, you can see the best pictures in the slash page.
 
 #
+
 ## Table of content
+
 1. [Getting Started](https://github.com/JeffersonGarcia15/UniverseJF#getting-started)
 2. [Technologies Used](https://github.com/JeffersonGarcia15/UniverseJF#technologies-used)
 3. [Key Features](https://github.com/JeffersonGarcia15/UniverseJF#key-features)
@@ -14,62 +16,135 @@
 6. [Future Goals](https://github.com/JeffersonGarcia15/UniverseJF#future-goals)
 
 #
+
 ## Getting Started
+
 1. Clone this repository
 2. Install dependencies (`npm install`)
 3. Create a `.env` file based on the `.env.example` and replace the value of `SESSION_SECRET` with your own `SESSION_SECRET` value. You can generate a value by using [UUID](https://www.npmjs.com/package/uuid) to have a more secure value.
 4. Set up your PostgreSQL ddiy_app user, a password and database and make sure it matches the `.env` file. Make sure to give CREATEDB privileges to your ddiy_app user.
 5. Enter the following commands:
+
 ```
 npx dotenv sequelize-cli db:create
 npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize-cli db:seed:all
 npm start
 ```
+
 #
+
 ## Technologies Used
+
 **Front End**
-* JavaScript
-* HTML
-* CSS
-* [Favicon.io](https://favicon.io)
-* [Fontawesome](http://fontawesome.com/)
-* React
-* Redux
-* Heroku
+
+- JavaScript
+- HTML
+- CSS
+- [Favicon.io](https://favicon.io)
+- [Fontawesome](http://fontawesome.com/)
+- React
+- Redux
+- Heroku
 
 **Back End**
-* Express.js
-* Sequelize.js
-* Faker.js
-* Node.js
-* Bcryptjs
-* PostgreSQL and Postbird
-* AJAX
-* AWS
+
+- Express.js
+- Sequelize.js
+- Faker.js
+- Node.js
+- Bcryptjs
+- PostgreSQL and Postbird
+- AJAX
+- AWS
 
 #
+
 ## Key Features
-* Users can view, upload, edit and delete photos
-* Users can view, post, edit and delete comments
-* Users can create albums for their photos
-* Users can add tags to photos and see all photos with an associated tag
-* Users can like another user's photos
-* Users can follow other users
+
+- Users can view, upload, edit and delete photos
+- Users can view, post, edit and delete comments
+- Users can create albums for their photos
+- Users can add tags to photos and see all photos with an associated tag
+- Users can like another user's photos
 
 #
+
+## Quick tour
+
+<details>
+  <summary>Auth</summary>
+</details>
+
+<details>
+  <summary>Core functionality</summary>
+</details>
+
+<details>
+  <summary>Comments and photo like</summary>
+</details>
+
+<details>
+  <summary>User edits</summary>
+</details>
+
 ## Code Snippets
 
+_Creating a tag by simply pressing "Enter"_
+
 ```js
-useEffect(() => {
-  dispatch(getSinglePhoto(id))
+function handleKeyDown(e) {
+  if (e.key === "Enter" && tagTitle.trim() !== "") {
+    e.preventDefault();
+    setTagsArray((prev) => {
+      return [...prev, tagTitle];
+    });
+    setTagTitle("");
+  }
+}
+```
 
-}, [dispatch, id])
+_Creating tags by sending an array of tags, to the backend, which would then check which tags exist, and the ones that don't exists will be created and the rest will simply be returned to avoid duplicating tags_
 
+Here I also used `Promise.all` rather than doing a for loop and sending a fetch request in order to optimize the fetch request with the help of that promise method.
+
+```js
+const onSubmit = async (e) => {
+  e.preventDefault();
+
+  const photo = await dispatch(
+    uploadSinglePhoto({
+      title,
+      description,
+      imgUrl,
+      userId: sessionUser.id,
+    })
+  );
+
+  // Send the entire array of tags to the backend in a single request
+  const tagsResponse = await dispatch(createTag({ tagsArray }));
+
+  // Assign tags to the photo
+  await Promise.all(
+    tagsResponse.map(({ id }) =>
+      dispatch(addUserTagToPhoto({ tagId: id, photoId: photo.id }))
+    )
+  );
+
+  await dispatch(addUserPhotoToAlbum(addPhotoAlbum, photo));
+
+  setShowMenu(false);
+  setTitle("");
+  setDescription("");
+  setTagsArray([]);
+  setTagTitle("");
+};
 ```
 
 #
+
 ## Wiki
+
 [API Documentation](https://github.com/JeffersonGarcia15/UniverseJF/wiki/API-Documentation)
 
 [Feature List](https://github.com/JeffersonGarcia15/UniverseJF/wiki/MVP-Feature-List)
@@ -82,7 +157,8 @@ useEffect(() => {
 
 ![](https://live.staticflickr.com/65535/51190674126_888c2b4b52_k.jpg)
 
+#
 
-# 
 ## Future Goals
-* Finish features that were not implemented
+
+- Implement followers
