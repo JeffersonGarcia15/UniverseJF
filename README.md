@@ -74,7 +74,7 @@ npm start
 
 <details>
   <summary>Auth</summary>
-    <video src="https://universejf.s3.us-east-2.amazonaws.com/DEMOS/universeJF_signup.mov"/>
+    <video src="https://universejf.s3.us-east-2.amazonaws.com/DEMOS/universeJF_signup.mov"></video>
 </details>
 
 <details>
