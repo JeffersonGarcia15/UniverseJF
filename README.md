@@ -74,7 +74,7 @@ npm start
 
 <details>
   <summary>Auth</summary>
-    ![Auth Demo](https://universejf.s3.us-east-2.amazonaws.com/DEMOS/universeJF_signup.gif)
+    ![Auth Demo](https://universejf.s3.us-east-2.amazonaws.com/DEMOS/universeJF_signup.mov)
 </details>
 
 <details>
