@@ -57,3 +57,22 @@
 .footer__about__us {
   cursor: pointer;
 }
+
+.about__the__project {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+
+.about__the__project h1,
+.how__it__works h1 {
+  font-size: 18px;
+}
+
+.show__it__works {
+  width: 180px;
+  height: 180px;
+}
