@@ -161,4 +161,14 @@ const onSubmit = async (e) => {
 
 ## Future Goals
 
+- Explore by tags(so photos that include a certain tag will appear with all photos using that tag)
+- UI Improvement and refactoring overall!
+- Creating an album requires a photo
+- Adding the same photo to multiple albums
+- Tags suggestions for photos
+- Search albums during album selections
+- Search tags during tag selections
+- Newly designed landing page
+- Newly designed login and signup pages
+- Newly designed UI for the photo details page
 - Implement followers

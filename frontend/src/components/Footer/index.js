@@ -59,18 +59,20 @@ function Footer() {
     <footer className="footer">
       {showHowItWorks && (
         <Modal onClose={toggleShowHowItWorks}>
-          <h1>
-            Please visit the{" "}
-            <a
-              href="https://github.com/JeffersonGarcia15/UniverseJF"
-              target="_blank"
-              className="footer__how__it__works__a"
-              rel="noreferrer"
-            >
-              repo
-            </a>{" "}
-            to see some of the app's demos{" "}
-          </h1>
+          <div className="about__the__project show__it__works">
+            <h1>
+              Please visit the{" "}
+              <a
+                href="https://github.com/JeffersonGarcia15/UniverseJF"
+                target="_blank"
+                className="footer__how__it__works__a"
+                rel="noreferrer"
+              >
+                repo
+              </a>{" "}
+              to see some of the app's demos{" "}
+            </h1>
+          </div>
         </Modal>
       )}
       <nav className="footer__logo">
