@@ -72,22 +72,19 @@ npm start
 
 ## Quick tour
 
-<details>
-  <summary>Auth</summary>
-    ![Auth Demo](https://universejf.s3.us-east-2.amazonaws.com/DEMOS/universeJF_signup.mov)
-</details>
+[Sign up](https://youtu.be/SO-sTS-QVtc)
 
-<details>
-  <summary>Core functionality</summary>
-</details>
+[Comments and photo likes](https://youtu.be/gfS-gwrA9vI)
 
-<details>
-  <summary>Comments and photo like</summary>
-</details>
+[Albums](https://youtu.be/4LIo-ekTkPo)
 
-<details>
-  <summary>User edits</summary>
-</details>
+[Photo and tag creation](https://youtu.be/H-vK3_ttoHU)
+
+[Photo update and deletion](https://youtu.be/3Z_79APk9VM)
+
+[Footer](https://youtu.be/A34O0y4xgHk)
+
+[User edits](https://youtu.be/EYMdoKuDckg)
 
 ## Code Snippets
 
